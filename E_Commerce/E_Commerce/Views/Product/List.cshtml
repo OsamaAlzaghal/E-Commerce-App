@@ -1,0 +1,29 @@
+﻿@using E_Commerce.Models
+@model List<Product>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+
+<table>
+    <tr>
+        <th>ProductID</th>
+        <th>ProductName</th>
+        <th>CategoryID</th>
+        <th>InStock</th>
+        <th>Price</th>
+        <th>Description</th>
+
+
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <a asp-controller="Home" asp-action="Index" asp-route-cartID=@item.ID asp-route-userID=@item.Name>
+                    @item.ID @item.Name @item.CategoryID @item.InStock @item.Price @item.Description
+                </a>
+            </td>
+        </tr>
+    }
+</table>

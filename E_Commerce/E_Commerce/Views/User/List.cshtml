@@ -1,0 +1,28 @@
+﻿@using E_Commerce.Models
+@model List<User>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+
+<table>
+    <tr>
+        <th>UserID</th>
+        <th>UserName</th>
+        <th>Email</th>
+        <th>Password</th>
+        <th>PhoneNumber</th>
+
+
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <a asp-controller="Home" asp-action="Index" asp-route-cartID=@item.ID asp-route-userID=@item.Name>
+                    @item.ID @item.Name @item.Email @item.Password @item.PhoneNumber
+                </a>
+            </td>
+        </tr>
+    }
+</table>

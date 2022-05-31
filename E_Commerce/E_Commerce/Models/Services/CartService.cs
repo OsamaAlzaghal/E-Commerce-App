@@ -16,10 +16,21 @@ namespace E_Commerce.Models.Services
         {
             _context = context;
         }
-
+        public async Task AddProductToCart(int cartID, ProductCart product)
+        {
+            Cart cart = await GetCart(cartID);
+            cart.ProductCarts.Add(product);
+            await _context.SaveChangesAsync();
+        }
         public async Task<List<Cart>> GetCarts()
         {
             return await _context.Carts.Select(x => x).ToListAsync();
         }
+
+        public async Task<Cart> GetCart(int id)
+        {
+            return await _context.Carts.Where(x => x.ID == id).Select(x => x).FirstOrDefaultAsync();
+        }
+
     }
 }

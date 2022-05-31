@@ -21,5 +21,10 @@ namespace E_Commerce.Models.Services
         {
             return await _context.Payments.Select(x => x).ToListAsync();
         }
+
+        public async Task<Payment> GetPayment(int id)
+        {
+            return await _context.Payments.Where(x => x.ID == id).Select(x => x).FirstOrDefaultAsync();
+        }
     }
 }

@@ -7,7 +7,7 @@ namespace E_Commerce.Models.Interfaces
 {
     interface IProductCart
     {
-        public Task<List<ProductCart>> GetProductCarts();
-
+        public Task<List<ProductCart>> GetAllProducstInCart(int cartID);
+        public Task<ProductCart> GetAProductFromCart(int cartID, int productID);
     }
 }

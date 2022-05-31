@@ -17,10 +17,35 @@ namespace E_Commerce.Models.Services
             _context = context;
         }
 
+        public async Task<Category> CreateCategory(Category category)
+        {
+            _context.Entry(category).State = EntityState.Added;
+            await _context.SaveChangesAsync();
+            return category;
+        }
+
         public async Task<List<Category>> GetCategories()
         {
             return await _context.Categories.Select(x => x).ToListAsync();
+        }
 
+        public async Task<Category> GetCategory(int id)
+        {
+            return await _context.Categories.Where(x => x.ID == id).Select(x => x).FirstOrDefaultAsync();
+        }
+
+        public async Task<Category> UpdateCategory(Category category)
+        {
+            _context.Entry(category).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+            return category;
+        }
+
+        public async Task DeleteCategory(int id)
+        {
+            Category category = await GetCategory(id);
+            _context.Entry(category).State = EntityState.Deleted;
+            await _context.SaveChangesAsync();
         }
     }
 }

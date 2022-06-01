@@ -36,14 +36,19 @@ namespace E_Commerce.Models.Services
 
         public async Task<Category> UpdateCategory(Category category)
         {
-            _context.Entry(category).State = EntityState.Modified;
+            Category oldCategory = await _context.Categories.FindAsync(category.ID);
+            oldCategory.Name = category.Name;
+            oldCategory.Description = category.Description;
+
+            _context.Entry(oldCategory).State = EntityState.Modified;
             await _context.SaveChangesAsync();
-            return category;
+            return oldCategory;
         }
 
         public async Task DeleteCategory(int id)
         {
             Category category = await GetCategory(id);
+            //_context.Categories.Remove(category);
             _context.Entry(category).State = EntityState.Deleted;
             await _context.SaveChangesAsync();
         }

@@ -26,6 +26,12 @@
         <span>Details</span>
         <input asp-for="@Model.Description" />
     </label>
+
+    <label>
+        <span>Category ID</span>
+        <input asp-for="@Model.CategoryID" />
+    </label>
     <button type="submit"> Save</button>
 </form>
+<a href="http://localhost:7231/Product/Delete?id=@Model.ID">Delete</a>
 <div asp-validation-summary="All"></div>

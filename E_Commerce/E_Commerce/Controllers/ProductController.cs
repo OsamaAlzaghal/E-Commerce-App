@@ -11,9 +11,11 @@ namespace E_Commerce.Controllers
     public class ProductController : Controller
     {
         private readonly IProduct _products;
-        public ProductController(IProduct product)
+        private readonly ICategory _categories;
+        public ProductController(IProduct product, ICategory category)
         {
             _products = product;
+            _categories = category;
         }
 
         public async Task<IActionResult> List()
@@ -43,11 +45,6 @@ namespace E_Commerce.Controllers
 
         public async Task<IActionResult> Update(int id)
         {
-            if(id == null)
-            {
-                return NotFound();
-            }
-
             Product product = await _products.GetProduct(id);
 
             if(product == null)
@@ -55,22 +52,25 @@ namespace E_Commerce.Controllers
                 return NotFound();
             }
             return View(product);
-
         }
 
-        public async Task<IActionResult> Update(int id , Product product)
+        [HttpPost]
+        public async Task<IActionResult> Update(Product product)
         {
-            if(id != product.ID)
-            {
-                return NotFound();
-            }
-
             if (ModelState.IsValid)
             {
                 await _products.UpdateProduct(product);
                 return Content("You have successfully updated product (Name: " + product.Name + ")");
             }
             return View(product);
+        }
+
+        //[HttpDelete]
+        public async Task<IActionResult> Delete(int id)
+        {
+            await _products.DeleteProduct(id);
+            return Content("You have successfully deleted the product");
+            //return View("~/Views/Product/List.cshtml");
         }
     }
 }

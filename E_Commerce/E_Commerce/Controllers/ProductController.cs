@@ -1,4 +1,5 @@
 ﻿using E_Commerce.Models;
+using E_Commerce.Models.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -9,13 +10,67 @@ namespace E_Commerce.Controllers
 {
     public class ProductController : Controller
     {
-        public IActionResult List()
+        private readonly IProduct _products;
+        public ProductController(IProduct product)
         {
-            List<Product> Products = new List<Product>();
-            Products.Add(new Product { ID = 1, Name = "gaming laptop", CategoryID = 1, InStock = true, Price = 1000, Description  = "good" });
-            Products.Add(new Product { ID = 2, Name = "4K TV", CategoryID = 2, InStock = true, Price = 500, Description = "good" });
+            _products = product;
+        }
 
-            return View(Products);
+        public async Task<IActionResult> List()
+        {
+            //List<Product> Products = new List<Product>();
+            //Products.Add(new Product { ID = 1, Name = "gaming laptop", CategoryID = 1, InStock = true, Price = 1000, Description  = "good" });
+            //Products.Add(new Product { ID = 2, Name = "4K TV", CategoryID = 2, InStock = true, Price = 500, Description = "good" });
+
+            return View(await _products.GetProducts());
+        }
+
+        public IActionResult Add()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Add(Product product)
+        {
+            if (ModelState.IsValid)
+            {
+                await _products.CreateProduct(product);
+                return Content("You have successfully added a category ! Name: " + product.Name + " Description: " + product.Description);
+            }
+            return View(product);
+        }
+
+        public async Task<IActionResult> Update(int id)
+        {
+            if(id == null)
+            {
+                return NotFound();
+            }
+
+            Product product = await _products.GetProduct(id);
+
+            if(product == null)
+            {
+                return NotFound();
+            }
+            return View(product);
+
+        }
+
+        public async Task<IActionResult> Update(int id , Product product)
+        {
+            if(id != product.ID)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                await _products.UpdateProduct(product);
+                return Content("You have successfully updated product (Name: " + product.Name + ")");
+            }
+            return View(product);
         }
     }
 }

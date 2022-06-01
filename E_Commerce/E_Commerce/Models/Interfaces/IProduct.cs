@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace E_Commerce.Models.Interfaces
 {
-    interface IProduct
+    public interface IProduct
     {
         public Task<List<Product>> GetProducts();
         public Task<Product> GetProduct(int id);

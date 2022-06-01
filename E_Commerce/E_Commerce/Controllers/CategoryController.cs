@@ -27,6 +27,7 @@ namespace E_Commerce.Controllers
             return View(await _category.GetCategories());
         }
 
+        ////////////////////////////////////////
         public IActionResult Add()
         {
             return View();
@@ -42,5 +43,28 @@ namespace E_Commerce.Controllers
             }
             return View(category);
         }
+        
+        ////////////////////////////////////////
+        
+        public async Task<IActionResult> Update(int id)
+        {
+            Category category = await _category.GetCategory(id);
+            return View(category);
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Update(Category category)
+        {
+            Category oldCategory = await _category.GetCategory(category.ID);
+            oldCategory.Name = category.Name;
+            oldCategory.Description = category.Description;
+            if (ModelState.IsValid)
+            {
+                await _category.UpdateCategory(category);
+                return Content("You have successfully updated category (Name: " + category.Name+ ")" );
+            }
+            return View(category);
+        }
+
     }
 }

@@ -34,6 +34,8 @@ namespace E_Commerce
                 options.UseSqlServer(connectionString);
             });
             services.AddTransient<ICategory, CategoryService>();
+            services.AddTransient<IProduct, ProductService>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

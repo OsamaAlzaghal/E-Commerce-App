@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace E_Commerce.Models.Interfaces
 {
-    interface IProductCart
+    public interface IProductCart
     {
         public Task<List<ProductCart>> GetAllProducstInCart(int cartID);
         public Task<ProductCart> GetAProductFromCart(int cartID, int productID);

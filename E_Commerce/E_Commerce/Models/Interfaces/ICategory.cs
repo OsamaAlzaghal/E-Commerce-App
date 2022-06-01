@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace E_Commerce.Models.Interfaces
 {
-    interface ICategory
+    public interface ICategory
     {
         public Task<List<Category>> GetCategories();
         public Task<Category> GetCategory(int id);

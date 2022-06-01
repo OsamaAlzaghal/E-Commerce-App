@@ -1,4 +1,6 @@
 using E_Commerce.Data;
+using E_Commerce.Models.Interfaces;
+using E_Commerce.Models.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -31,6 +33,7 @@ namespace E_Commerce
                 string connectionString = Configuration.GetConnectionString("DefaultConnection");
                 options.UseSqlServer(connectionString);
             });
+            services.AddTransient<ICategory, CategoryService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -41,7 +44,10 @@ namespace E_Commerce
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            else
+            {
+                app.UseExceptionHandler("/Home/Error");
+            }
             app.UseStaticFiles();
 
             app.UseRouting();

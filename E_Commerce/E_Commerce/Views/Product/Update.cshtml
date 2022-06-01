@@ -1,0 +1,31 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model E_Commerce.Models.Product
+
+<h3>Edit Category</h3>
+
+<form asp-controller="Product" asp-action="Update" method="post">
+    <input hidden asp-for="@Model.ID" />
+
+
+    <label>
+        <span>Name</span>
+        <input asp-for="@Model.Name" />
+    </label>
+
+    <label>
+        <span>Price</span>
+        <input asp-for="@Model.Price" />
+    </label>
+
+    <label>
+        <span>InStock</span>
+        <input asp-for="@Model.InStock" />
+    </label>
+
+    <label>
+        <span>Details</span>
+        <input asp-for="@Model.Description" />
+    </label>
+    <button type="submit"> Save</button>
+</form>
+<div asp-validation-summary="All"></div>

@@ -12,14 +12,19 @@ namespace E_Commerce.Controllers
     public class CategoryController : Controller
     {
         private readonly ICategory _category;
-        public IActionResult List()
+        public CategoryController(ICategory category)
         {
-            List<Category> categories = new List<Category>();
-            categories.Add(new Category { ID = 1, Name = "Laptops", Description = "Good"});
-            categories.Add(new Category { ID = 2, Name = "TV", Description = "Good"});
-            categories.Add(new Category { ID = 3, Name = "Accessories", Description = "Good"});
-            categories.Add(new Category { ID = 4, Name = "Sound System", Description = "Good"});
-            return View(categories);
+            _category = category;
+        }
+        public async Task<IActionResult> List()
+        {
+            //List<Category> categories = new List<Category>();
+            //categories.Add(new Category { ID = 1, Name = "Laptops", Description = "Good"});
+            //categories.Add(new Category { ID = 2, Name = "TV", Description = "Good"});
+            //categories.Add(new Category { ID = 3, Name = "Accessories", Description = "Good"});
+            //categories.Add(new Category { ID = 4, Name = "Sound System", Description = "Good"});
+
+            return View(await _category.GetCategories());
         }
 
         public IActionResult Add()
@@ -28,11 +33,11 @@ namespace E_Commerce.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(Category category)
+        public async Task<IActionResult> Add(Category category)
         {
             if (ModelState.IsValid)
             {
-                //_category.CreateCategory(category);
+                await _category.CreateCategory(category);
                 return Content("You have successfully added a category ! Name: " + category.Name + " Description: " + category.Description);
             }
             return View(category);

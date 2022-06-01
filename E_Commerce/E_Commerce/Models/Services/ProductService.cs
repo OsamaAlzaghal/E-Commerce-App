@@ -18,10 +18,9 @@ namespace E_Commerce.Models.Services
         }
         public async Task<Product> CreateProduct(Product product)
         {
+            product.Category = await _context.Categories.FindAsync(product.CategoryID);
             _context.Entry(product).State = EntityState.Added;
-
             await _context.SaveChangesAsync();
-
             return product;
         }
 
@@ -44,7 +43,16 @@ namespace E_Commerce.Models.Services
 
         public async Task<Product> UpdateProduct(Product product)
         {
-            _context.Entry(product).State = EntityState.Modified;
+            Category category = await _context.Categories.FindAsync(product.CategoryID);
+            Product oldProduct = await GetProduct(product.ID);
+            // Very important step.
+            oldProduct.Category = category;
+            oldProduct.CategoryID = product.CategoryID;
+            oldProduct.Name = product.Name;
+            oldProduct.Price = product.Price;
+            oldProduct.InStock = product.InStock;
+            oldProduct.Description = product.Description;
+            _context.Entry(oldProduct).State = EntityState.Modified;
             await _context.SaveChangesAsync();
             return product;
         }

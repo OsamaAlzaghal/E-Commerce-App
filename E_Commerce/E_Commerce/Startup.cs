@@ -55,7 +55,7 @@ namespace E_Commerce
             // new for Cookies auth
             services.ConfigureApplicationCookie(options =>
             {
-                options.AccessDeniedPath = "/auth/index";
+                options.AccessDeniedPath = "/auth/NotAuthorized";
             });
 
             // Differences between JWT and cookies 

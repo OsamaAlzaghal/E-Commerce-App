@@ -19,6 +19,7 @@ namespace E_Commerce.Models.Services
         public async Task<Product> CreateProduct(Product product)
         {
             product.Category = await _context.Categories.FindAsync(product.CategoryID);
+            
             _context.Entry(product).State = EntityState.Added;
             await _context.SaveChangesAsync();
             return product;

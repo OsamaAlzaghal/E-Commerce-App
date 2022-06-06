@@ -34,6 +34,11 @@ namespace E_Commerce.Models.Services
             return await _context.Categories.Where(x => x.ID == id).Select(x => x).FirstOrDefaultAsync();
         }
 
+        public async Task<List<Product>> GetProductsByCategoryID(int id)
+        {
+            return await _context.Products.Where(x => x.CategoryID == id).Select(x => x).ToListAsync();
+        }
+
         public async Task<Category> UpdateCategory(Category category)
         {
             Category oldCategory = await _context.Categories.FindAsync(category.ID);

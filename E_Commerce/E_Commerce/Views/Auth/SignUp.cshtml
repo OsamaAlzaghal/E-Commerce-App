@@ -1,4 +1,7 @@
-﻿<form method="post" action="SignUp">
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model E_Commerce.Auth.Model.DTO.RegisterDTO 
+
+<form method="post" action="/auth/SignUp">
     <label>Name:</label>
     <input name="UserName" />
     <label>Password:</label>
@@ -7,3 +10,5 @@
     <input name="Email" />
     <button type="submit">Signup</button>
 </form>
+
+<div asp-validation-summary="All"></div>

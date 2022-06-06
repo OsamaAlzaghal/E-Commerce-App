@@ -335,33 +335,26 @@ namespace E_Commerce.Migrations
                         {
                             Id = 2,
                             ClaimType = "permissions",
-                            ClaimValue = "update",
+                            ClaimValue = "delete",
                             RoleId = "administrator"
                         },
                         new
                         {
                             Id = 3,
                             ClaimType = "permissions",
-                            ClaimValue = "delete",
-                            RoleId = "administrator"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            ClaimType = "permissions",
                             ClaimValue = "create",
                             RoleId = "editor"
                         },
                         new
                         {
-                            Id = 5,
+                            Id = 4,
                             ClaimType = "permissions",
                             ClaimValue = "update",
                             RoleId = "editor"
                         },
                         new
                         {
-                            Id = 6,
+                            Id = 5,
                             ClaimType = "permissions",
                             ClaimValue = "create",
                             RoleId = "user"

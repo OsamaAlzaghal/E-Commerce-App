@@ -39,7 +39,8 @@ namespace E_Commerce.Controllers
             if (ModelState.IsValid)
             {
                 await _category.CreateCategory(category);
-                return Content("You have successfully added a category ! Name: " + category.Name + " Description: " + category.Description);
+                return Redirect("http://localhost:7231/Category/List");
+                //return Content("You have successfully added a category ! Name: " + category.Name + " Description: " + category.Description);
             }
             return View(category);
         }
@@ -63,7 +64,8 @@ namespace E_Commerce.Controllers
             if (ModelState.IsValid)
             {
                 await _category.UpdateCategory(category);
-                return Content("You have successfully updated category (Name: " + category.Name + ")");
+                return Redirect("http://localhost:7231/Category/List");
+                //return Content("You have successfully updated category (Name: " + category.Name + ")");
             }
             return View(category);
         }
@@ -72,8 +74,14 @@ namespace E_Commerce.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             await _category.DeleteCategory(id);
-            return Content("You have successfully deleted the category");
+            return Redirect("http://localhost:7231/Category/List");
+            //return Content("You have successfully deleted the category");
             //return View("~/Views/Category/List.cshtml");
+        }
+
+        public async Task<IActionResult> ProductsInCategory(int id)
+        {
+            return View(await _category.GetProductsByCategoryID(id));
         }
     }
 }

@@ -1,0 +1,26 @@
+﻿@using E_Commerce.Models
+@model List<Product>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+    <table>
+        <tr>
+            <th>ProductID</th>
+            <th>ProductName</th>
+            <th>CategoryID</th>
+            <th>InStock</th>
+            <th>Price</th>
+            <th>Description</th>
+
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a>
+                        @item.ID @item.Name @item.CategoryID @item.InStock @item.Price @item.Description <a href="http://localhost:7231/Product/Delete?id=@item.ID" class="headertag">Delete</a>
+                    </a>
+                </td>
+            </tr>
+        }
+    </table>

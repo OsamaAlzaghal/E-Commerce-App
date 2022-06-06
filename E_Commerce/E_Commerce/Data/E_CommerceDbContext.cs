@@ -49,7 +49,7 @@ namespace E_Commerce.Data
 
                 );
 
-            SeedRoles(modelBuilder, "administrator", "create", "update", "delete");
+            SeedRoles(modelBuilder, "administrator", "create", "delete");
             SeedRoles(modelBuilder, "editor", "create", "update");
             SeedRoles(modelBuilder, "user", "create");
 

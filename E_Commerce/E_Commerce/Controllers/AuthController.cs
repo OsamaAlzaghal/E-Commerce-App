@@ -1,5 +1,6 @@
 ﻿using E_Commerce.Auth.Model.DTO;
 using E_Commerce.Models.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -19,11 +20,20 @@ namespace E_Commerce.Controllers
         {
             return View();
         }
+        public async Task<ActionResult<UserDTO>> Authenticate(LoginDTO login)
+        {
+            var user = await userService.Authenticate(login.UserName, login.Password);
+            if (user == null)
+            {
+                return RedirectToAction("Index");
+            }
+            return Redirect("http://localhost:7231/Category/List");
+        }
         public IActionResult SignUp()
         {
             return View();
         }
-
+        //[Authorize(Roles = "user")]
         [HttpPost]
         public async Task<ActionResult<UserDTO>> SignUp(RegisterDTO register)
         {
@@ -32,27 +42,8 @@ namespace E_Commerce.Controllers
             {
                 return Redirect("/");
             }
-            return View();
+            return View(user);
         }
-
-        public async Task<ActionResult<UserDTO>> Authenticate(LoginDTO login)
-        {
-            var user = await userService.Authenticate(login.UserName, login.Password);
-            if (user == null)
-            {
-                return RedirectToAction("Index");
-            }
-            return Redirect("/");
-        }
-
-        //[HttpGet("me")]
-        //[Authorize(Policy = "create")]
-        //public async Task<ActionResult<UserDto>> Me()
-        //{
-        //    // Following the [Authorize] phase, this.User will be ... you.
-        //    // Put a breakpoint here and inspect to see what's passed to our getUser method
-        //    return await _userService.GetUser(this.User);
-        //}
 
     }
 }

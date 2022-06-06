@@ -1,5 +1,5 @@
 ﻿@using E_Commerce.Models
-@model List<Product>
+@model dynamic
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 
@@ -21,9 +21,11 @@
         <tr>
             <td>
                 <a asp-controller="Home" asp-action="Index" asp-route-cartID=@item.ID asp-route-userID=@item.Name>
-                    @item.ID @item.Name @item.CategoryID @item.InStock @item.Price @item.Description
+                    @item.ID @item.Name @item.CategoryID @item.InStock @item.Price @item.Description <a href="http://localhost:7231/Product/Update?id=@item.ID"  class="headertag">Edit</a>
                 </a>
             </td>
         </tr>
     }
 </table>
+
+

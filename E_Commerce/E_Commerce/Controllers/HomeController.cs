@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +9,23 @@ namespace E_Commerce.Controllers
 {
     public class HomeController : Controller
     {
+        //[AllowAnonymous]
+        //[Authorize(Roles = "adminstrator")]
         public IActionResult Index()
         {
             return View();
         }
+
+        ////[Authorize(Roles = "user")]
+        //public IActionResult IndexUser()
+        //{
+        //    return View();
+        //}
+
+        ////[Authorize(Roles = "editor")]
+        //public IActionResult IndexEditor()
+        //{
+        //    return View();
+        //}
     }
 }

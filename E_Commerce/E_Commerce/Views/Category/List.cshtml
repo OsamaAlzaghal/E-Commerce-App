@@ -2,6 +2,9 @@
 @model List<Category>
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
+<button>
+    <a href="http://localhost:7231/Category/Add" class="headertag">Add Category</a>
+</button>
 
 <table class="styled-table">
     <tr>
@@ -15,10 +18,10 @@
     {
         <tr>
             <td>
-                <a asp-controller="Home" asp-action="Index" asp-route-cartID=@item.ID asp-route-userID=@item.Name>
-                    @item.ID @item.Name @item.Description <a href="http://localhost:7231/Category/Update?id=@item.ID" class="headertag">Edit</a>
+                <a asp-controller="Category" asp-action="ProductsInCategory" asp-route-id=@item.ID>
+                    @item.ID @item.Name @item.Description <a href="http://localhost:7231/Category/Delete?id=@item.ID" class="headertag">Delete</a>
                 </a>
             </td>
         </tr>
-    }`
+    }
 </table>

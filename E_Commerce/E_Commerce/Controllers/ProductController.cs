@@ -38,7 +38,8 @@ namespace E_Commerce.Controllers
             if (ModelState.IsValid)
             {
                 await _products.CreateProduct(product);
-                return Content("You have successfully added a category ! Name: " + product.Name + " Description: " + product.Description);
+                return Redirect("http://localhost:7231/Product/List");
+                //return Content("You have successfully added a category ! Name: " + product.Name + " Description: " + product.Description);
             }
             return View(product);
         }
@@ -60,7 +61,8 @@ namespace E_Commerce.Controllers
             if (ModelState.IsValid)
             {
                 await _products.UpdateProduct(product);
-                return Content("You have successfully updated product (Name: " + product.Name + ")");
+                return Redirect("http://localhost:7231/Product/List");
+                //return Content("You have successfully updated product (Name: " + product.Name + ")");
             }
             return View(product);
         }
@@ -69,7 +71,8 @@ namespace E_Commerce.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             await _products.DeleteProduct(id);
-            return Content("You have successfully deleted the product");
+            return Redirect("http://localhost:7231/Product/List");
+            //return Content("You have successfully deleted the product");
             //return View("~/Views/Product/List.cshtml");
         }
     }

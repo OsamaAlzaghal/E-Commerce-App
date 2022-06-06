@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace E_Commerce.Migrations
 {
     [DbContext(typeof(E_CommerceDbContext))]
-    [Migration("20220606095334_rolesAdded")]
-    partial class rolesAdded
+    [Migration("20220606152135_CreateDatabase")]
+    partial class CreateDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -337,33 +337,26 @@ namespace E_Commerce.Migrations
                         {
                             Id = 2,
                             ClaimType = "permissions",
-                            ClaimValue = "update",
+                            ClaimValue = "delete",
                             RoleId = "administrator"
                         },
                         new
                         {
                             Id = 3,
                             ClaimType = "permissions",
-                            ClaimValue = "delete",
-                            RoleId = "administrator"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            ClaimType = "permissions",
                             ClaimValue = "create",
                             RoleId = "editor"
                         },
                         new
                         {
-                            Id = 5,
+                            Id = 4,
                             ClaimType = "permissions",
                             ClaimValue = "update",
                             RoleId = "editor"
                         },
                         new
                         {
-                            Id = 6,
+                            Id = 5,
                             ClaimType = "permissions",
                             ClaimValue = "create",
                             RoleId = "user"

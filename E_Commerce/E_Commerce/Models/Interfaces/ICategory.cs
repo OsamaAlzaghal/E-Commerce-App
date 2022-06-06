@@ -12,5 +12,6 @@ namespace E_Commerce.Models.Interfaces
         public Task<Category> CreateCategory(Category category);
         public Task<Category> UpdateCategory(Category category);
         public Task DeleteCategory(int id);
+        public Task<List<Product>> GetProductsByCategoryID(int id);
     }
 }

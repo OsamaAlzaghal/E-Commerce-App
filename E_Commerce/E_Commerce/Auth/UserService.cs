@@ -87,13 +87,6 @@ namespace E_Commerce.Models.Services
             return null;
         }
 
-        public async Task<UserDTO> GetUser(ClaimsPrincipal principal)
-        {
-            var user = await _userManager.GetUserAsync(principal);
-            return new UserDTO
-            {
-                Username = user.UserName
-            };
-        }
+        
     }
 }

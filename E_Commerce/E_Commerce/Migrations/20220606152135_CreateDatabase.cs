@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace E_Commerce.Migrations
 {
-    public partial class rolesAdded : Migration
+    public partial class CreateDatabase : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -216,11 +216,10 @@ namespace E_Commerce.Migrations
                 values: new object[,]
                 {
                     { 1, "permissions", "create", "administrator" },
-                    { 2, "permissions", "update", "administrator" },
-                    { 3, "permissions", "delete", "administrator" },
-                    { 4, "permissions", "create", "editor" },
-                    { 5, "permissions", "update", "editor" },
-                    { 6, "permissions", "create", "user" }
+                    { 2, "permissions", "delete", "administrator" },
+                    { 3, "permissions", "create", "editor" },
+                    { 4, "permissions", "update", "editor" },
+                    { 5, "permissions", "create", "user" }
                 });
 
             migrationBuilder.InsertData(

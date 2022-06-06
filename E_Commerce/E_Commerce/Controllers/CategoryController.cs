@@ -1,6 +1,7 @@
 ﻿using E_Commerce.Data;
 using E_Commerce.Models;
 using E_Commerce.Models.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -28,11 +29,13 @@ namespace E_Commerce.Controllers
         }
 
         ////////////////////////////////////////
+        [Authorize(Roles = "adminstrator")]
         public IActionResult Add()
         {
             return View();
         }
 
+        [Authorize(Roles = "adminstrator")]
         [HttpPost]
         public async Task<IActionResult> Add(Category category)
         {
@@ -47,6 +50,7 @@ namespace E_Commerce.Controllers
 
         ////////////////////////////////////////
 
+        [Authorize(Roles = "editor")]
         public async Task<IActionResult> Update(int id)
         {
             Category category = await _category.GetCategory(id);
@@ -57,7 +61,7 @@ namespace E_Commerce.Controllers
             }
             return View(category);
         }
-
+        [Authorize(Roles = "editor")]
         [HttpPost]
         public async Task<IActionResult> Update(Category category)
         {
@@ -71,6 +75,7 @@ namespace E_Commerce.Controllers
         }
 
         //[HttpDelete]
+        [Authorize(Roles = "adminstrator")]
         public async Task<IActionResult> Delete(int id)
         {
             await _category.DeleteCategory(id);

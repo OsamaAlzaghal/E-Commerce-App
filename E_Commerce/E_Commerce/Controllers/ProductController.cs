@@ -1,5 +1,6 @@
 ﻿using E_Commerce.Models;
 using E_Commerce.Models.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -27,11 +28,13 @@ namespace E_Commerce.Controllers
             return View(await _products.GetProducts());
         }
 
+        [Authorize(Roles = "adminstrator")]
         public IActionResult Add()
         {
             return View();
         }
 
+        [Authorize(Roles = "adminstrator")]
         [HttpPost]
         public async Task<IActionResult> Add(Product product)
         {
@@ -44,6 +47,7 @@ namespace E_Commerce.Controllers
             return View(product);
         }
 
+        [Authorize(Roles = "editor")]
         public async Task<IActionResult> Update(int id)
         {
             Product product = await _products.GetProduct(id);
@@ -55,6 +59,7 @@ namespace E_Commerce.Controllers
             return View(product);
         }
 
+        [Authorize(Roles = "editor")]
         [HttpPost]
         public async Task<IActionResult> Update(Product product)
         {
@@ -67,6 +72,7 @@ namespace E_Commerce.Controllers
             return View(product);
         }
 
+        [Authorize(Roles = "adminstrator")]
         //[HttpDelete]
         public async Task<IActionResult> Delete(int id)
         {

@@ -45,5 +45,10 @@ namespace E_Commerce.Controllers
             return View(user);
         }
 
+        public IActionResult NotAuthorized()
+        {
+            return View();
+        }
+
     }
 }

@@ -11,9 +11,8 @@ namespace E_Commerce.Controllers
     {
         public IActionResult List()
         {
-            List<User> Users = new List<User>();
-            Users.Add(new User { ID = 1, Name = "Laith", Email = "123@LTUC.com", Password = "123", PhoneNumber = "079" });
-            Users.Add(new User { ID = 2, Name = "Osama", Email = "456@LTUC.com", Password = "456", PhoneNumber = "078" });
+            List<ApplicationUser> Users = new List<ApplicationUser>();
+          
             
             return View(Users);
         }

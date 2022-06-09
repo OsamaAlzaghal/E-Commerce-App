@@ -28,13 +28,13 @@ namespace E_Commerce.Controllers
             return View(await _products.GetProducts());
         }
 
-        [Authorize(Roles = "adminstrator")]
+        [Authorize(Roles = "administrator")]
         public IActionResult Add()
         {
             return View();
         }
 
-        [Authorize(Roles = "adminstrator")]
+        [Authorize(Roles = "administrator")]
         [HttpPost]
         public async Task<IActionResult> Add(Product product)
         {
@@ -72,7 +72,7 @@ namespace E_Commerce.Controllers
             return View(product);
         }
 
-        [Authorize(Roles = "adminstrator")]
+        [Authorize(Roles = "administrator")]
         //[HttpDelete]
         public async Task<IActionResult> Delete(int id)
         {

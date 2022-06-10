@@ -10,9 +10,9 @@ namespace E_Commerce.Models.Services
 {
     public class ProductService : IProduct
     {
-        private readonly E_CommerceDbContext _context;
+        private  readonly E_CommerceDbContext _context;
 
-        public ProductService(E_CommerceDbContext context)
+        public  ProductService(E_CommerceDbContext context)
         {
             _context = context;
         }
@@ -30,7 +30,7 @@ namespace E_Commerce.Models.Services
             return await _context.Products.Select(x => x).ToListAsync();
         }
 
-        public async Task<Product> GetProduct(int id)
+        public  async Task<Product> GetProduct(int id)
         {
             return await _context.Products.Where(x => x.ID == id).Select(x => x).FirstOrDefaultAsync();
         }

@@ -29,13 +29,13 @@ namespace E_Commerce.Controllers
         }
 
         ////////////////////////////////////////
-        [Authorize(Roles = "adminstrator")]
+        [Authorize(Roles = "administrator")]
         public IActionResult Add()
         {
             return View();
         }
 
-        [Authorize(Roles = "adminstrator")]
+        [Authorize(Roles = "administrator")]
         [HttpPost]
         public async Task<IActionResult> Add(Category category)
         {
@@ -75,7 +75,7 @@ namespace E_Commerce.Controllers
         }
 
         //[HttpDelete]
-        [Authorize(Roles = "adminstrator")]
+        [Authorize(Roles = "administrator")]
         public async Task<IActionResult> Delete(int id)
         {
             await _category.DeleteCategory(id);

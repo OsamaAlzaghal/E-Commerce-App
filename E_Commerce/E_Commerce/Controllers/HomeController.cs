@@ -13,7 +13,7 @@ namespace E_Commerce.Controllers
         //[Authorize(Roles = "adminstrator")]
         public IActionResult Index()
         {
-            return View();
+            return RedirectToAction("Index", "Auth");
         }
 
         ////[Authorize(Roles = "user")]

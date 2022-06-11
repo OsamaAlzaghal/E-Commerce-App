@@ -1,5 +1,6 @@
 using E_Commerce.Models;
 using E_Commerce.Models.Services;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -9,12 +10,13 @@ namespace Tests
 {
     public  class UnitTest1 : Mock
     {
+        private readonly IConfiguration _configuration;
         [Fact]
         public void TestGettingProduct()
         {
             Product product = (Product)CreateAndSaveTestProduct().Result;
             product.Name = "New Laptop";
-            var service = new ProductService(_db);
+            var service = new ProductService(_db, _configuration);
             Product NewProduct = service.GetProduct(product.ID).Result;
             Assert.Equal(NewProduct.Name, product.Name);
         }
@@ -35,7 +37,7 @@ namespace Tests
             Product product = (Product)CreateAndSaveTestProduct().Result;
             string OldProductName = product.Name;
             product.Name = "New Laptop";
-            var service = new ProductService(_db);
+            var service = new ProductService(_db, _configuration);
             product = await service.UpdateProduct(product);
             product = service.GetProduct(product.ID).Result;
             Assert.NotEqual(OldProductName, product.Name);
@@ -58,7 +60,7 @@ namespace Tests
         {
             Product product = (Product)CreateAndSaveTestProduct().Result;
             int id = product.ID;
-            var repository = new ProductService(_db);
+            var repository = new ProductService(_db, _configuration);
             await repository.DeleteProduct(id);
             product = await repository.GetProduct(id);
             Assert.Null(product);

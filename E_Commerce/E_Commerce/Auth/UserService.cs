@@ -58,7 +58,6 @@ namespace E_Commerce.Models.Services
                 modelstate.AddModelError(errorKey, error.Description);
             }
             return null;
-
         }
 
 
@@ -86,7 +85,5 @@ namespace E_Commerce.Models.Services
 
             return null;
         }
-
-        
     }
 }

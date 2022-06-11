@@ -14,6 +14,7 @@ namespace E_Commerce.Models
         public bool InStock { get; set; }
         public string Description { get; set; }
         public Category Category { get; set; }
-        
+        public string URL { get; set; }
+
     }
 }

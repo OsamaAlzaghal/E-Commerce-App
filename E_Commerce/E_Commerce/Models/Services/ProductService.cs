@@ -1,6 +1,10 @@
-﻿using E_Commerce.Data;
+﻿using Azure.Storage.Blobs;
+using Azure.Storage.Blobs.Models;
+using E_Commerce.Data;
 using E_Commerce.Models.Interfaces;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,15 +15,36 @@ namespace E_Commerce.Models.Services
     public class ProductService : IProduct
     {
         private  readonly E_CommerceDbContext _context;
+        private readonly IConfiguration _configuration;
+        private E_CommerceDbContext db;
 
-        public  ProductService(E_CommerceDbContext context)
+        public  ProductService(E_CommerceDbContext context, IConfiguration configuration)
         {
             _context = context;
+            _configuration = configuration;
         }
-        public async Task<Product> CreateProduct(Product product)
+
+        public async Task<Product> CreateProduct(Product product, IFormFile file)
         {
             product.Category = await _context.Categories.FindAsync(product.CategoryID);
             
+            BlobContainerClient container = new BlobContainerClient(_configuration.GetConnectionString("AzureBlob"), "ecommercecontainer");
+            await container.CreateIfNotExistsAsync();
+            BlobClient blob = container.GetBlobClient(file.FileName);
+            using var stream = file.OpenReadStream();
+
+            BlobUploadOptions options = new BlobUploadOptions()
+            {
+                HttpHeaders = new BlobHttpHeaders() { ContentType = file.ContentType }
+            };
+
+            if (!blob.Exists())
+            {
+                await blob.UploadAsync(stream, options);
+            }
+
+            product.URL = blob.Uri.ToString();
+            stream.Close();
             _context.Entry(product).State = EntityState.Added;
             await _context.SaveChangesAsync();
             return product;

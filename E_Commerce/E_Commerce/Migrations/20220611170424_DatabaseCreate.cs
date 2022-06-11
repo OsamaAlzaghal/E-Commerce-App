@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace E_Commerce.Migrations
 {
-    public partial class CreateDatabase : Migration
+    public partial class DatabaseCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -176,7 +176,8 @@ namespace E_Commerce.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Price = table.Column<double>(type: "float", nullable: false),
                     InStock = table.Column<bool>(type: "bit", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    URL = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -187,16 +188,6 @@ namespace E_Commerce.Migrations
                         principalTable: "Categories",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.InsertData(
-                table: "AspNetRoles",
-                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[,]
-                {
-                    { "administrator", "00000000-0000-0000-0000-000000000000", "administrator", "ADMINISTRATOR" },
-                    { "editor", "00000000-0000-0000-0000-000000000000", "editor", "EDITOR" },
-                    { "user", "00000000-0000-0000-0000-000000000000", "user", "USER" }
                 });
 
             migrationBuilder.InsertData(
@@ -211,32 +202,20 @@ namespace E_Commerce.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "AspNetRoleClaims",
-                columns: new[] { "Id", "ClaimType", "ClaimValue", "RoleId" },
-                values: new object[,]
-                {
-                    { 1, "permissions", "create", "administrator" },
-                    { 2, "permissions", "delete", "administrator" },
-                    { 3, "permissions", "create", "editor" },
-                    { 4, "permissions", "update", "editor" },
-                    { 5, "permissions", "create", "user" }
-                });
-
-            migrationBuilder.InsertData(
                 table: "Products",
-                columns: new[] { "ID", "CategoryID", "Description", "InStock", "Name", "Price" },
+                columns: new[] { "ID", "CategoryID", "Description", "InStock", "Name", "Price", "URL" },
                 values: new object[,]
                 {
-                    { 1, 1, "A gaming laptop with great performance", true, "ASUS Laptop", 1000.0 },
-                    { 2, 1, "A gaming laptop with great performance", true, "Acer Laptop", 900.0 },
-                    { 3, 1, "A descktop pc with great performance", true, "iMac Retina", 1500.0 },
-                    { 4, 1, "Dell OptiPlex 7780 All-in-One 10Gen Intel Core i7 up to 4.8GHz 16M 6-Cores , 8GB RAM DDR4 (upgradable) , 256 GB Gen 3 PCIe x4 NVMe SSD + 1TB HDD , 27inch WVA Full HD 250nits Screen, NO Optical Drive,Intel UHD 630 Graphic Card,", true, "Dell OptiPlex 7780 All-in-One All-in-One 10Gen Intel Core i7 w/ Adjustable 27inch Touch", 1000.0 },
-                    { 5, 2, "5.1 digital surround sound: Hear every detail in your Dolby Digital and DTS soundtracks the way the studio intended. Sub woofer: 165 Watts", true, "Logitech Z906 5.1 Surround Sound Speaker System THX, Dolby Digital & DTS Digital Certified", 100.0 },
-                    { 6, 2, "High performance speaker system that produces 50 Watts of raw, rock solid audio power", true, "Creative SBS E2800 2.1 High Performance Speakers System - Black", 55.0 },
-                    { 7, 3, "4-Series 4K UHD smart TV", true, "Amazon Fire TV 43", 250.0 },
-                    { 8, 3, "Class LED 4K UHD Smart Fire TV (PN43951-22U, 2021 Model)", true, "Pioneer 43-inch", 210.0 },
-                    { 9, 4, "Apple Flagship mobile phone with 256GB", false, "iPhone 13 Pro Max", 1200.0 },
-                    { 10, 4, "Samsung Flagship mobile phone with 256GB", true, "Samsung Galaxy S22 Ultra", 1000.0 }
+                    { 1, 1, "A gaming laptop with great performance", true, "ASUS Laptop", 1000.0, "" },
+                    { 2, 1, "A gaming laptop with great performance", true, "Acer Laptop", 900.0, "" },
+                    { 3, 1, "A descktop pc with great performance", true, "iMac Retina", 1500.0, "" },
+                    { 4, 1, "Dell OptiPlex 7780 All-in-One 10Gen Intel Core i7 up to 4.8GHz 16M 6-Cores , 8GB RAM DDR4 (upgradable) , 256 GB Gen 3 PCIe x4 NVMe SSD + 1TB HDD , 27inch WVA Full HD 250nits Screen, NO Optical Drive,Intel UHD 630 Graphic Card,", true, "Dell OptiPlex 7780 All-in-One All-in-One 10Gen Intel Core i7 w/ Adjustable 27inch Touch", 1000.0, "" },
+                    { 5, 2, "5.1 digital surround sound: Hear every detail in your Dolby Digital and DTS soundtracks the way the studio intended. Sub woofer: 165 Watts", true, "Logitech Z906 5.1 Surround Sound Speaker System THX, Dolby Digital & DTS Digital Certified", 100.0, "" },
+                    { 6, 2, "High performance speaker system that produces 50 Watts of raw, rock solid audio power", true, "Creative SBS E2800 2.1 High Performance Speakers System - Black", 55.0, "" },
+                    { 7, 3, "4-Series 4K UHD smart TV", true, "Amazon Fire TV 43", 250.0, "" },
+                    { 8, 3, "Class LED 4K UHD Smart Fire TV (PN43951-22U, 2021 Model)", true, "Pioneer 43-inch", 210.0, "" },
+                    { 9, 4, "Apple Flagship mobile phone with 256GB", false, "iPhone 13 Pro Max", 1200.0, "" },
+                    { 10, 4, "Samsung Flagship mobile phone with 256GB", true, "Samsung Galaxy S22 Ultra", 1000.0, "https://shop.samsung.com/ie/images/products/28636/21040/2000x2000/SM-S908BZKDEUB.webp" }
                 });
 
             migrationBuilder.CreateIndex(

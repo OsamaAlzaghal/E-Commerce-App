@@ -18,7 +18,7 @@
             <tr>
                 <td>
                     <a>
-                        @item.ID @item.Name @item.CategoryID @item.InStock @item.Price @item.Description <a href="http://localhost:7231/Product/Delete?id=@item.ID" class="headertag">Delete</a>
+                        @item.ID @item.Name @item.CategoryID @item.InStock @item.Price @item.Description  <a asp-action="Delete" asp-controller="Product" asp-route-id="@item.ID" class="headertag">Delete</a> <a asp-action="Update" asp-controller="Product" asp-route-id="@item.ID">Edit</a>
                     </a>
                 </td>
             </tr>

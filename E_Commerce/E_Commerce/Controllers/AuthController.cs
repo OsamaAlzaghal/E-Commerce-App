@@ -27,7 +27,7 @@ namespace E_Commerce.Controllers
             {
                 return RedirectToAction("Index");
             }
-            return Redirect("http://localhost:7231/Category/List");
+            return RedirectToAction("List", "Category");
         }
         public IActionResult SignUp()
         {

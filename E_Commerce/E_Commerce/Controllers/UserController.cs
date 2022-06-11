@@ -12,8 +12,6 @@ namespace E_Commerce.Controllers
         public IActionResult List()
         {
             List<ApplicationUser> Users = new List<ApplicationUser>();
-          
-            
             return View(Users);
         }
     }

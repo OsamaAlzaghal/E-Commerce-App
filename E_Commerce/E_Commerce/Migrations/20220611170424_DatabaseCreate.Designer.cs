@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace E_Commerce.Migrations
 {
     [DbContext(typeof(E_CommerceDbContext))]
-    [Migration("20220606152135_CreateDatabase")]
-    partial class CreateDatabase
+    [Migration("20220611170424_DatabaseCreate")]
+    partial class DatabaseCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -153,6 +153,9 @@ namespace E_Commerce.Migrations
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
+                    b.Property<string>("URL")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("ID");
 
                     b.HasIndex("CategoryID");
@@ -167,7 +170,8 @@ namespace E_Commerce.Migrations
                             Description = "A gaming laptop with great performance",
                             InStock = true,
                             Name = "ASUS Laptop",
-                            Price = 1000.0
+                            Price = 1000.0,
+                            URL = ""
                         },
                         new
                         {
@@ -176,7 +180,8 @@ namespace E_Commerce.Migrations
                             Description = "A gaming laptop with great performance",
                             InStock = true,
                             Name = "Acer Laptop",
-                            Price = 900.0
+                            Price = 900.0,
+                            URL = ""
                         },
                         new
                         {
@@ -185,7 +190,8 @@ namespace E_Commerce.Migrations
                             Description = "A descktop pc with great performance",
                             InStock = true,
                             Name = "iMac Retina",
-                            Price = 1500.0
+                            Price = 1500.0,
+                            URL = ""
                         },
                         new
                         {
@@ -194,7 +200,8 @@ namespace E_Commerce.Migrations
                             Description = "Dell OptiPlex 7780 All-in-One 10Gen Intel Core i7 up to 4.8GHz 16M 6-Cores , 8GB RAM DDR4 (upgradable) , 256 GB Gen 3 PCIe x4 NVMe SSD + 1TB HDD , 27inch WVA Full HD 250nits Screen, NO Optical Drive,Intel UHD 630 Graphic Card,",
                             InStock = true,
                             Name = "Dell OptiPlex 7780 All-in-One All-in-One 10Gen Intel Core i7 w/ Adjustable 27inch Touch",
-                            Price = 1000.0
+                            Price = 1000.0,
+                            URL = ""
                         },
                         new
                         {
@@ -203,7 +210,8 @@ namespace E_Commerce.Migrations
                             Description = "5.1 digital surround sound: Hear every detail in your Dolby Digital and DTS soundtracks the way the studio intended. Sub woofer: 165 Watts",
                             InStock = true,
                             Name = "Logitech Z906 5.1 Surround Sound Speaker System THX, Dolby Digital & DTS Digital Certified",
-                            Price = 100.0
+                            Price = 100.0,
+                            URL = ""
                         },
                         new
                         {
@@ -212,7 +220,8 @@ namespace E_Commerce.Migrations
                             Description = "High performance speaker system that produces 50 Watts of raw, rock solid audio power",
                             InStock = true,
                             Name = "Creative SBS E2800 2.1 High Performance Speakers System - Black",
-                            Price = 55.0
+                            Price = 55.0,
+                            URL = ""
                         },
                         new
                         {
@@ -221,7 +230,8 @@ namespace E_Commerce.Migrations
                             Description = "4-Series 4K UHD smart TV",
                             InStock = true,
                             Name = "Amazon Fire TV 43",
-                            Price = 250.0
+                            Price = 250.0,
+                            URL = ""
                         },
                         new
                         {
@@ -230,7 +240,8 @@ namespace E_Commerce.Migrations
                             Description = "Class LED 4K UHD Smart Fire TV (PN43951-22U, 2021 Model)",
                             InStock = true,
                             Name = "Pioneer 43-inch",
-                            Price = 210.0
+                            Price = 210.0,
+                            URL = ""
                         },
                         new
                         {
@@ -239,7 +250,8 @@ namespace E_Commerce.Migrations
                             Description = "Apple Flagship mobile phone with 256GB",
                             InStock = false,
                             Name = "iPhone 13 Pro Max",
-                            Price = 1200.0
+                            Price = 1200.0,
+                            URL = ""
                         },
                         new
                         {
@@ -248,7 +260,8 @@ namespace E_Commerce.Migrations
                             Description = "Samsung Flagship mobile phone with 256GB",
                             InStock = true,
                             Name = "Samsung Galaxy S22 Ultra",
-                            Price = 1000.0
+                            Price = 1000.0,
+                            URL = "https://shop.samsung.com/ie/images/products/28636/21040/2000x2000/SM-S908BZKDEUB.webp"
                         });
                 });
 
@@ -277,29 +290,6 @@ namespace E_Commerce.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "administrator",
-                            ConcurrencyStamp = "00000000-0000-0000-0000-000000000000",
-                            Name = "administrator",
-                            NormalizedName = "ADMINISTRATOR"
-                        },
-                        new
-                        {
-                            Id = "editor",
-                            ConcurrencyStamp = "00000000-0000-0000-0000-000000000000",
-                            Name = "editor",
-                            NormalizedName = "EDITOR"
-                        },
-                        new
-                        {
-                            Id = "user",
-                            ConcurrencyStamp = "00000000-0000-0000-0000-000000000000",
-                            Name = "user",
-                            NormalizedName = "USER"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -324,43 +314,6 @@ namespace E_Commerce.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetRoleClaims");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            ClaimType = "permissions",
-                            ClaimValue = "create",
-                            RoleId = "administrator"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            ClaimType = "permissions",
-                            ClaimValue = "delete",
-                            RoleId = "administrator"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            ClaimType = "permissions",
-                            ClaimValue = "create",
-                            RoleId = "editor"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            ClaimType = "permissions",
-                            ClaimValue = "update",
-                            RoleId = "editor"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            ClaimType = "permissions",
-                            ClaimValue = "create",
-                            RoleId = "user"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>

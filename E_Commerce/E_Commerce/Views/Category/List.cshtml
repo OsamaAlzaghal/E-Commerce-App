@@ -3,7 +3,7 @@
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 <button>
-    <a href="http://localhost:7231/Category/Add" class="headertag">Add Category</a>
+    <a asp-action="Add" asp-controller="Category" class="headertag">Add Category</a>
 </button>
 
 <table class="styled-table">
@@ -19,7 +19,7 @@
         <tr>
             <td>
                 <a asp-controller="Category" asp-action="ProductsInCategory" asp-route-id=@item.ID>
-                    @item.ID @item.Name @item.Description <a href="http://localhost:7231/Category/Delete?id=@item.ID" class="headertag">Delete</a>
+                    @item.ID @item.Name @item.Description <a asp-action="Delete" asp-controller="Category" asp-route-id="@item.ID" class="headertag">Delete</a>
                 </a>
             </td>
         </tr>

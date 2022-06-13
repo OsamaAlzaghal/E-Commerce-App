@@ -1,0 +1,21 @@
+﻿@page
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model E_Commerce.Pages.Product_Details.DetailsModel
+@{
+}
+
+
+
+@if (@Model.product != null)
+{
+    var product = Model.product;
+    <h2>@product.Name</h2>
+    @if(product.URL != "")
+     {
+        <img src="@product.URL" width=200 />
+     }
+    <h3>Price: @product.Price</h3>
+    <h3>Availablility: @product.InStock</h3>
+    <h3>Details: @product.Description</h3>
+}
+

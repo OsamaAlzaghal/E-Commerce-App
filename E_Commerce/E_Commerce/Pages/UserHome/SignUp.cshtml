@@ -1,0 +1,24 @@
+﻿@page
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model E_Commerce.Pages.UserHome.UserHomeModel
+@{
+}
+
+<h2>Please Sign Up:</h2>
+
+<form method="post">
+    <label>UserName:</label>
+    <input asp-for="input.UserName" />
+
+    <label>Email:</label>
+    <input asp-for="input.Email" />
+
+    <label>Password:</label>
+    <input asp-for="input.Password" />
+
+    <button type="submit" >SignUp</button>
+</form>
+
+
+<div asp-validation-summary="All"></div>
+

@@ -38,7 +38,10 @@ namespace E_Commerce
 
                }).AddEntityFrameworkStores<E_CommerceDbContext>();
 
-            services.AddMvc();
+            services.AddMvc().AddRazorPagesOptions(options =>
+            {
+                options.Conventions.AddPageRoute("/UserHome/SignIn", "");
+            });
             services.AddDbContext<E_CommerceDbContext>(options => {
                 // Our DATABASE_URL from js days
                 string connectionString = Configuration.GetConnectionString("DefaultConnection");
@@ -90,6 +93,7 @@ namespace E_Commerce
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapRazorPages();
                 endpoints.MapControllerRoute("default", "{controller=Auth}/{action=Index}");
             });
         }

@@ -12,5 +12,6 @@ namespace E_Commerce.Models.Interfaces
     {
         public Task<UserDTO> Register(RegisterDTO registerDto, ModelStateDictionary modelstate);
         public Task<UserDTO> Authenticate(string username, string password);
-    }
+        public Task Logout();
+    };
 }

@@ -50,5 +50,9 @@ namespace E_Commerce.Controllers
             return View();
         }
 
+        public async Task Logout()
+        {
+            await userService.Logout();
+        }
     }
 }

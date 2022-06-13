@@ -4,14 +4,16 @@ using E_Commerce.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace E_Commerce.Migrations
 {
     [DbContext(typeof(E_CommerceDbContext))]
-    partial class E_CommerceDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220613084245_initializing")]
+    partial class initializing
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -288,29 +290,6 @@ namespace E_Commerce.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "administrator",
-                            ConcurrencyStamp = "00000000-0000-0000-0000-000000000000",
-                            Name = "administrator",
-                            NormalizedName = "ADMINISTRATOR"
-                        },
-                        new
-                        {
-                            Id = "editor",
-                            ConcurrencyStamp = "00000000-0000-0000-0000-000000000000",
-                            Name = "editor",
-                            NormalizedName = "EDITOR"
-                        },
-                        new
-                        {
-                            Id = "user",
-                            ConcurrencyStamp = "00000000-0000-0000-0000-000000000000",
-                            Name = "user",
-                            NormalizedName = "USER"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -335,43 +314,6 @@ namespace E_Commerce.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetRoleClaims");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            ClaimType = "permissions",
-                            ClaimValue = "create",
-                            RoleId = "administrator"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            ClaimType = "permissions",
-                            ClaimValue = "delete",
-                            RoleId = "administrator"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            ClaimType = "permissions",
-                            ClaimValue = "create",
-                            RoleId = "editor"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            ClaimType = "permissions",
-                            ClaimValue = "update",
-                            RoleId = "editor"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            ClaimType = "permissions",
-                            ClaimValue = "create",
-                            RoleId = "user"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>

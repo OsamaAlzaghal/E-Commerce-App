@@ -45,9 +45,9 @@ namespace E_Commerce.Data
                 new Product { ID = 10, Name = "Samsung Galaxy S22 Ultra", InStock = true, Price = 1000, Description = "Samsung Flagship mobile phone with 256GB", CategoryID = 4, URL= "https://shop.samsung.com/ie/images/products/28636/21040/2000x2000/SM-S908BZKDEUB.webp" }
                 );
 
-            //SeedRoles(modelBuilder, "administrator", "create", "delete");
-            //SeedRoles(modelBuilder, "editor", "create", "update");
-            //SeedRoles(modelBuilder, "user", "create");
+            SeedRoles(modelBuilder, "administrator", "create", "delete");
+            SeedRoles(modelBuilder, "editor", "create", "update");
+            SeedRoles(modelBuilder, "user", "create");
         }
         private int id = 1;
         private void SeedRoles(ModelBuilder modelBuilder, string roleName, params string[] permissions)

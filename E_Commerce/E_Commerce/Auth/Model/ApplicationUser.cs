@@ -8,5 +8,7 @@ namespace E_Commerce.Models
 {
     public class ApplicationUser : IdentityUser
     {
+        public string CartID { get; set; }
+        public Cart Cart { get; set; }
     }
 }

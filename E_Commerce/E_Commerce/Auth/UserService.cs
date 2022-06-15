@@ -29,8 +29,9 @@ namespace E_Commerce.Models.Services
             var user = new ApplicationUser
             {
                 UserName = registerDto.UserName,
-                Email = registerDto.Email
+                Email = registerDto.Email,
             };
+            user.CartID = user.Id;
 
             var result = await _userManager.CreateAsync(user, registerDto.Password);
 

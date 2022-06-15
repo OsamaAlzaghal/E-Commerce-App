@@ -4,14 +4,16 @@ using E_Commerce.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace E_Commerce.Migrations
 {
     [DbContext(typeof(E_CommerceDbContext))]
-    partial class E_CommerceDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220615153115_DeletedData")]
+    partial class DeletedData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -27,8 +29,8 @@ namespace E_Commerce.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
-                    b.Property<string>("CartID")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("CartID")
+                        .HasColumnType("int");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -76,6 +78,9 @@ namespace E_Commerce.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CartID")
+                        .IsUnique();
+
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
 
@@ -89,17 +94,15 @@ namespace E_Commerce.Migrations
 
             modelBuilder.Entity("E_Commerce.Models.Cart", b =>
                 {
-                    b.Property<string>("ID")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("UserID")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("UserID")
+                        .HasColumnType("int");
 
                     b.HasKey("ID");
-
-                    b.HasIndex("UserID")
-                        .IsUnique()
-                        .HasFilter("[UserID] IS NOT NULL");
 
                     b.ToTable("Cart");
                 });
@@ -156,8 +159,8 @@ namespace E_Commerce.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("CartID")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int?>("CartID")
+                        .HasColumnType("int");
 
                     b.Property<int>("CategoryID")
                         .HasColumnType("int");
@@ -296,12 +299,7 @@ namespace E_Commerce.Migrations
                     b.Property<int>("ProductID")
                         .HasColumnType("int");
 
-                    b.Property<string>("CartID1")
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("CartID", "ProductID");
-
-                    b.HasIndex("CartID1");
 
                     b.HasIndex("ProductID");
 
@@ -499,13 +497,15 @@ namespace E_Commerce.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("E_Commerce.Models.Cart", b =>
+            modelBuilder.Entity("E_Commerce.Models.ApplicationUser", b =>
                 {
-                    b.HasOne("E_Commerce.Models.ApplicationUser", "User")
-                        .WithOne("Cart")
-                        .HasForeignKey("E_Commerce.Models.Cart", "UserID");
+                    b.HasOne("E_Commerce.Models.Cart", "Cart")
+                        .WithOne("User")
+                        .HasForeignKey("E_Commerce.Models.ApplicationUser", "CartID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("User");
+                    b.Navigation("Cart");
                 });
 
             modelBuilder.Entity("E_Commerce.Models.Product", b =>
@@ -527,7 +527,9 @@ namespace E_Commerce.Migrations
                 {
                     b.HasOne("E_Commerce.Models.Cart", "Cart")
                         .WithMany()
-                        .HasForeignKey("CartID1");
+                        .HasForeignKey("CartID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("E_Commerce.Models.Product", "Product")
                         .WithMany()
@@ -591,14 +593,11 @@ namespace E_Commerce.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("E_Commerce.Models.ApplicationUser", b =>
-                {
-                    b.Navigation("Cart");
-                });
-
             modelBuilder.Entity("E_Commerce.Models.Cart", b =>
                 {
                     b.Navigation("Products");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("E_Commerce.Models.Category", b =>

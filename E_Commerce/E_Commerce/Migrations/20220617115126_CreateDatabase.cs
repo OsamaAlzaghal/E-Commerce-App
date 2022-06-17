@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace E_Commerce.Migrations
 {
-    public partial class DatabaseCreate : Migration
+    public partial class CreateDatabase : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -26,6 +26,7 @@ namespace E_Commerce.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    CartID = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -191,6 +192,16 @@ namespace E_Commerce.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[,]
+                {
+                    { "administrator", "00000000-0000-0000-0000-000000000000", "administrator", "ADMINISTRATOR" },
+                    { "editor", "00000000-0000-0000-0000-000000000000", "editor", "EDITOR" },
+                    { "user", "00000000-0000-0000-0000-000000000000", "user", "USER" }
+                });
+
+            migrationBuilder.InsertData(
                 table: "Categories",
                 columns: new[] { "ID", "Description", "Name" },
                 values: new object[,]
@@ -199,6 +210,18 @@ namespace E_Commerce.Migrations
                     { 2, "Find Speakers and headsets in our store here!", "Audio Devices" },
                     { 3, "Find all Televitions in our store here!", "PC && Laptops" },
                     { 4, "Find all moblie devices in our store here!", "Mobile Phones" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetRoleClaims",
+                columns: new[] { "Id", "ClaimType", "ClaimValue", "RoleId" },
+                values: new object[,]
+                {
+                    { 1, "permissions", "create", "administrator" },
+                    { 2, "permissions", "delete", "administrator" },
+                    { 3, "permissions", "create", "editor" },
+                    { 4, "permissions", "update", "editor" },
+                    { 5, "permissions", "create", "user" }
                 });
 
             migrationBuilder.InsertData(

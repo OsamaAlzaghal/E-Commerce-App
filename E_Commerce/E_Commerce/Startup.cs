@@ -40,7 +40,7 @@ namespace E_Commerce
 
             services.AddMvc().AddRazorPagesOptions(options =>
             {
-                options.Conventions.AddPageRoute("/UserHome/SignIn", "");
+                options.Conventions.AddPageRoute("/Categories/Categories", "");
             });
             services.AddDbContext<E_CommerceDbContext>(options => {
                 // Our DATABASE_URL from js days

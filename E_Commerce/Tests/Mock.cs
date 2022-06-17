@@ -37,7 +37,7 @@ namespace Tests
 
         protected async Task<Product> CreateAndSaveTestProduct()
         {
-            var product = new Product { Name = "laptop", Description= "gaming laptop", CategoryID = 1 };
+            var product = new Product { Name = "laptop", Description = "gaming laptop", CategoryID = 1 };
             _db.Products.Add(product);
             await _db.SaveChangesAsync();
             Assert.NotEqual(0, product.ID); // Sanity check
@@ -46,7 +46,7 @@ namespace Tests
 
         protected async Task<Category> CreateAndSaveTestCategory()
         {
-            var category = new Category { Name= "electronics", Description = "electronics category" };
+            var category = new Category { Name = "electronics", Description = "electronics category" };
             _db.Categories.Add(category);
             await _db.SaveChangesAsync();
             Assert.NotEqual(0, category.ID); // Sanity check

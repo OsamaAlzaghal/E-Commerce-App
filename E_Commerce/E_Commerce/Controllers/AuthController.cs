@@ -50,9 +50,10 @@ namespace E_Commerce.Controllers
             return View();
         }
 
-        public async Task Logout()
+        public async Task<IActionResult> Logout()
         {
             await userService.Logout();
+            return Redirect("/Categories/Categories");
         }
     }
 }

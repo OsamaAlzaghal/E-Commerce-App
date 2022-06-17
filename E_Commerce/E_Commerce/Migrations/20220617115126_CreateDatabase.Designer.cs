@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace E_Commerce.Migrations
 {
     [DbContext(typeof(E_CommerceDbContext))]
-    [Migration("20220615154848_FixedReleation2")]
-    partial class FixedReleation2
+    [Migration("20220617115126_CreateDatabase")]
+    partial class CreateDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -89,23 +89,6 @@ namespace E_Commerce.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("E_Commerce.Models.Cart", b =>
-                {
-                    b.Property<string>("ID")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("UserID")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("UserID")
-                        .IsUnique()
-                        .HasFilter("[UserID] IS NOT NULL");
-
-                    b.ToTable("Cart");
-                });
-
             modelBuilder.Entity("E_Commerce.Models.Category", b =>
                 {
                     b.Property<int>("ID")
@@ -158,9 +141,6 @@ namespace E_Commerce.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("CartID")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<int>("CategoryID")
                         .HasColumnType("int");
 
@@ -180,8 +160,6 @@ namespace E_Commerce.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
-
-                    b.HasIndex("CartID");
 
                     b.HasIndex("CategoryID");
 
@@ -288,26 +266,6 @@ namespace E_Commerce.Migrations
                             Price = 1000.0,
                             URL = "https://shop.samsung.com/ie/images/products/28636/21040/2000x2000/SM-S908BZKDEUB.webp"
                         });
-                });
-
-            modelBuilder.Entity("E_Commerce.Models.ProductCart", b =>
-                {
-                    b.Property<int>("CartID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProductID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("CartID1")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("CartID", "ProductID");
-
-                    b.HasIndex("CartID1");
-
-                    b.HasIndex("ProductID");
-
-                    b.ToTable("ProductCart");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -501,21 +459,8 @@ namespace E_Commerce.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("E_Commerce.Models.Cart", b =>
-                {
-                    b.HasOne("E_Commerce.Models.ApplicationUser", "User")
-                        .WithOne("Cart")
-                        .HasForeignKey("E_Commerce.Models.Cart", "UserID");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("E_Commerce.Models.Product", b =>
                 {
-                    b.HasOne("E_Commerce.Models.Cart", null)
-                        .WithMany("Products")
-                        .HasForeignKey("CartID");
-
                     b.HasOne("E_Commerce.Models.Category", "Category")
                         .WithMany("Products")
                         .HasForeignKey("CategoryID")
@@ -523,23 +468,6 @@ namespace E_Commerce.Migrations
                         .IsRequired();
 
                     b.Navigation("Category");
-                });
-
-            modelBuilder.Entity("E_Commerce.Models.ProductCart", b =>
-                {
-                    b.HasOne("E_Commerce.Models.Cart", "Cart")
-                        .WithMany()
-                        .HasForeignKey("CartID1");
-
-                    b.HasOne("E_Commerce.Models.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Cart");
-
-                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -591,16 +519,6 @@ namespace E_Commerce.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("E_Commerce.Models.ApplicationUser", b =>
-                {
-                    b.Navigation("Cart");
-                });
-
-            modelBuilder.Entity("E_Commerce.Models.Cart", b =>
-                {
-                    b.Navigation("Products");
                 });
 
             modelBuilder.Entity("E_Commerce.Models.Category", b =>

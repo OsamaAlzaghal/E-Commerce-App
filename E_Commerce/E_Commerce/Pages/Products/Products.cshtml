@@ -7,9 +7,9 @@
 
 <h2>Welcome</h2>
 
-@if (Model.products != null)
+@if (Model.Products != null)
 {
-    foreach (var product in Model.products)
+    foreach (var product in Model.Products)
     {
         @* <a asp-page="/accounts/the name of the page" asp-route-id="@person.Id" ></a>*@
         <tr>
@@ -22,10 +22,6 @@
 
                     @product.ID @product.Name
                 </a>
-                <form method="post" asp-page="/Settings/Index">
-                    <input id="one" type="hidden" value=product.ID/>
-                    <button>Add to Cart</button>
-                </form>
             </td>
         </tr>
     }

@@ -8,7 +8,7 @@ using Xunit;
 
 namespace Tests
 {
-    public  class UnitTest1 : Mock
+    public class UnitTest1 : Mock
     {
         private readonly IConfiguration _configuration;
         [Fact]

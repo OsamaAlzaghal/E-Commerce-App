@@ -9,17 +9,17 @@ namespace E_Commerce.Components
     {
         // By convention.
         [BindProperty]
-        public List<Product> Products { get; set; }
+        public List<Product> CartProducts { get; set; }
         [BindProperty]
         public Cart ProductsCart { get; set; }
+        public string CartCookie { get; set; }
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            if (Products != null)
+            CartCookie = HttpContext.Request.Cookies[$"{User.Identity.Name}'CartsList"];
+            if(CartCookie != null)
             {
-                Products = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Product>>(HttpContext.Request.Cookies["Cart"]);
-                ProductsCart.Count = Products.Count;
-                ProductsCart.Products = Products;
-                return View(ProductsCart);
+                CartProducts = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Product>>(CartCookie);
+                return View(new Cart { Count = CartProducts.Count, Products = CartProducts });
             }
             else
             {

@@ -1,23 +1,28 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using E_Commerce.Models;
-using E_Commerce.Models.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace E_Commerce.Pages.Cart
 {
+    [Authorize(Roles = "user")]
     public class CartModel : PageModel
     {
-        public string cart { get; set; }
-        
+        [BindProperty]
+        public string CartCookie { get; set; }
+        [BindProperty]
+        public List<Product> CartProducts { get; set; }
+
         public async Task OnGet()
         {
-            
+            CartCookie = HttpContext.Request.Cookies[$"{User.Identity.Name}'CartsList"];
+            if (CartCookie != null)
+            {
+                CartProducts = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Product>>(CartCookie);
+            }
         }
     }
 }

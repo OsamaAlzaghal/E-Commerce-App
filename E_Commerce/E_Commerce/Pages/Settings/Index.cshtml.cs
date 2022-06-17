@@ -33,10 +33,10 @@ namespace E_Commerce.Pages.Settings
         public async Task OnPost()
         {
             //Products.Add(new MiniCart { ID = });
-            Cart = JsonConvert.SerializeObject(Products, Formatting.Indented);
-            CookieOptions cookieOptions = new CookieOptions();
-            cookieOptions.Expires = new System.DateTimeOffset(DateTime.Now.AddDays(7));
-            HttpContext.Response.Cookies.Append("Cart", Cart, cookieOptions);
+            //Cart = JsonConvert.SerializeObject(Products, Formatting.Indented);
+            //CookieOptions cookieOptions = new CookieOptions();
+            //cookieOptions.Expires = new System.DateTimeOffset(DateTime.Now.AddDays(7));
+            //HttpContext.Response.Cookies.Append("Cart", Cart, cookieOptions);
         }
 
         public class MiniCart

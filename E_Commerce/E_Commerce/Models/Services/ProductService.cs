@@ -16,7 +16,6 @@ namespace E_Commerce.Models.Services
     {
         private  readonly E_CommerceDbContext _context;
         private readonly IConfiguration _configuration;
-        private E_CommerceDbContext db;
 
         public  ProductService(E_CommerceDbContext context, IConfiguration configuration)
         {

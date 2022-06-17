@@ -1,8 +1,8 @@
 ﻿@model E_Commerce.Components.CartCountViewComponent.Cart
 
-@if (Model.Products != null)
+@if (Model != null)
 {
-    <span>@Model.Products.Count</span>
+    <span>@Model.Count</span>
 }
 else
 {

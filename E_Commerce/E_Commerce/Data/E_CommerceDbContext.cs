@@ -13,6 +13,8 @@ namespace E_Commerce.Data
     {
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
+        //public DbSet<Cart> Cart { get; set; }
+        //public DbSet<ProductCart> ProductCart { get; set; }
 
         public E_CommerceDbContext(DbContextOptions options) : base(options)
         {
@@ -73,6 +75,11 @@ namespace E_Commerce.Data
             ).ToArray();
 
             modelBuilder.Entity<IdentityRoleClaim<string>>().HasData(RoleClaims);
+            //modelBuilder.Entity<ProductCart>().HasKey(x => new { x.CartID, x.ProductID });
+            //modelBuilder.Entity<ApplicationUser>()
+            //.HasOne(a => a.Cart)
+            //.WithOne(a => a.User)
+            //.HasForeignKey<Cart>(c => c.UserID);
         }
     }
 }

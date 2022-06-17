@@ -1,15 +1,12 @@
 ﻿@page
-@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-@model E_Commerce.Pages.Products.ProductsModel
-
+@model E_Commerce.Pages.Settings.IndexModel
 @{
 }
 
-<h2>Welcome</h2>
 
-@if (Model.Products != null)
+@if (Model.CookieCart != null)
 {
-    foreach (var product in Model.Products)
+    foreach (var product in Model.CookieCart)
     {
         @* <a asp-page="/accounts/the name of the page" asp-route-id="@person.Id" ></a>*@
         <tr>

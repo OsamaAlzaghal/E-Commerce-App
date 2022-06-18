@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace E_Commerce.Migrations
 {
-    public partial class CreateDatabase : Migration
+    public partial class databaseInitialize : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

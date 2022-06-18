@@ -50,6 +50,7 @@ namespace E_Commerce
 
             services.AddTransient<ICategory, CategoryService>();
             services.AddTransient<IProduct, ProductService>();
+            services.AddTransient<IEmail, EmailService>();
 
             // Map the interface with the service
             services.AddTransient<IUser, UserService>();

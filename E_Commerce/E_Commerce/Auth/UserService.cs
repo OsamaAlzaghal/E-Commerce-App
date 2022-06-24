@@ -17,23 +17,32 @@ namespace E_Commerce.Models.Services
         private UserManager<ApplicationUser> _userManager;
         // remove the JwtToken Service and use the signInManager
         private SignInManager<ApplicationUser> _signInManager;
+        private readonly E_CommerceDbContext _context;
 
         // replace JWT with signInmanager
-        public UserService(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> SignInMngr)
+        public UserService(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> SignInMngr, E_CommerceDbContext dbContext)
         {
             _userManager = userManager;
             _signInManager = SignInMngr;
+            _context = dbContext;
         }
         public async Task<UserDTO> Register(RegisterDTO registerDto, ModelStateDictionary modelstate)
         {
+            //Cart cart = new Cart { };
+            //_context.Entry(cart).State = EntityState.Added;
+            //await _context.SaveChangesAsync();
+
             var user = new ApplicationUser
             {
                 UserName = registerDto.UserName,
                 Email = registerDto.Email,
+                //Cart = cart
+                
             };
-            user.CartID = user.Id;
+            // user.CartID = user.Id;
 
             var result = await _userManager.CreateAsync(user, registerDto.Password);
+            
 
             if (result.Succeeded)
             {

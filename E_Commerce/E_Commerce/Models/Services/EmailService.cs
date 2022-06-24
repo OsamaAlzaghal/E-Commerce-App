@@ -55,5 +55,15 @@ namespace E_Commerce.Models.Services
 
         }
 
+        public async Task WelcomeMail(string email)
+        {
+            SendGridClient client = new SendGridClient("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");
+            SendGridMessage msg = new SendGridMessage();
+            msg.SetFrom("21028869@student.ltuc.com", "Store Team");
+            msg.AddTo(email);
+            msg.SetSubject("Welcome to our store!");
+            msg.AddContent(MimeType.Html, "You have successfully registered an account to our store, Welcome!");
+
+        }
     }
 }

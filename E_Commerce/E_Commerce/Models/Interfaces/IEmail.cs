@@ -8,5 +8,6 @@ namespace E_Commerce.Models.Interfaces
     public interface IEmail
     {
         public Task SendMail(string email, List<Product> products);
+        public Task WelcomeMail(string email);
     }
 }

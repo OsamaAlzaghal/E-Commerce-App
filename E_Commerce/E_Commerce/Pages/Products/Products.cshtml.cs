@@ -23,6 +23,8 @@ namespace E_Commerce.Pages.Products
         [BindProperty]
         public string CartCookie { get; set; }
 
+        public string CategoryName { get; set; }
+
         public ProductsModel(IProduct product, ICategory category)
         {
             ProductService = product;
@@ -40,6 +42,7 @@ namespace E_Commerce.Pages.Products
             else
             {
                 Products = await CategoryService.GetProductsByCategoryID(id);
+                CategoryName = (await CategoryService.GetCategory(id)).Name;
             }
             //products = await CategoryService.GetProductsByCategoryID(id);
         }

@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace E_Commerce.Migrations
 {
     [DbContext(typeof(E_CommerceDbContext))]
-    [Migration("20220620072151_CreateDatabase")]
+    [Migration("20220624111019_CreateDatabase")]
     partial class CreateDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -30,7 +30,7 @@ namespace E_Commerce.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("CartID")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -78,6 +78,8 @@ namespace E_Commerce.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CartID");
+
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
 
@@ -87,6 +89,19 @@ namespace E_Commerce.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+                });
+
+            modelBuilder.Entity("E_Commerce.Models.Cart", b =>
+                {
+                    b.Property<string>("ID")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("UserID")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Carts");
                 });
 
             modelBuilder.Entity("E_Commerce.Models.Category", b =>
@@ -141,6 +156,9 @@ namespace E_Commerce.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("CartID")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<int>("CategoryID")
                         .HasColumnType("int");
 
@@ -160,6 +178,8 @@ namespace E_Commerce.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
+
+                    b.HasIndex("CartID");
 
                     b.HasIndex("CategoryID");
 
@@ -459,8 +479,21 @@ namespace E_Commerce.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("E_Commerce.Models.ApplicationUser", b =>
+                {
+                    b.HasOne("E_Commerce.Models.Cart", "Cart")
+                        .WithMany()
+                        .HasForeignKey("CartID");
+
+                    b.Navigation("Cart");
+                });
+
             modelBuilder.Entity("E_Commerce.Models.Product", b =>
                 {
+                    b.HasOne("E_Commerce.Models.Cart", null)
+                        .WithMany("Products")
+                        .HasForeignKey("CartID");
+
                     b.HasOne("E_Commerce.Models.Category", "Category")
                         .WithMany("Products")
                         .HasForeignKey("CategoryID")
@@ -519,6 +552,11 @@ namespace E_Commerce.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("E_Commerce.Models.Cart", b =>
+                {
+                    b.Navigation("Products");
                 });
 
             modelBuilder.Entity("E_Commerce.Models.Category", b =>

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace E_Commerce.Migrations
 {
     [DbContext(typeof(E_CommerceDbContext))]
-    [Migration("20220624111019_CreateDatabase")]
-    partial class CreateDatabase
+    [Migration("20220624115421_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

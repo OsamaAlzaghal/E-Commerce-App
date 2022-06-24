@@ -18,13 +18,18 @@ namespace E_Commerce.Models.Services
         // remove the JwtToken Service and use the signInManager
         private SignInManager<ApplicationUser> _signInManager;
         private readonly E_CommerceDbContext _context;
+        private readonly IEmail _email;
+
+       
+        
 
         // replace JWT with signInmanager
-        public UserService(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> SignInMngr, E_CommerceDbContext dbContext)
+        public UserService(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> SignInMngr, E_CommerceDbContext dbContext, IEmail email)
         {
             _userManager = userManager;
             _signInManager = SignInMngr;
             _context = dbContext;
+            _email = email;
         }
         public async Task<UserDTO> Register(RegisterDTO registerDto, ModelStateDictionary modelstate)
         {
@@ -50,6 +55,7 @@ namespace E_Commerce.Models.Services
                 IList<string> Roles = new List<string>();
                 Roles.Add("user");
                 await _userManager.AddToRolesAsync(user, Roles);
+                await _email.WelcomeMail(registerDto.Email);
                 return new UserDTO
                 {
                     Username = user.UserName,

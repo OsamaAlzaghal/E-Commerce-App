@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - AppName</title>
+    <title>@ViewData["Title"] - Electronics Center</title>
 
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
@@ -42,6 +42,7 @@
                     <a asp-area="" asp-controller="Auth" asp-action="Logout" class="navbar-brand"> SignOut</a>
                 }
 
+                <a asp-area="" asp-page="/AboutUs/AboutUs" class="navbar-brand"> AboutUs</a>
 
             </div>
             <div class="navbar-collapse collapse">
@@ -52,7 +53,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; 2019 - AppName</p>
+            <p>&copy; 2022 - Electronics Center</p>
         </footer>
     </div>
 

@@ -1,0 +1,38 @@
+﻿@page
+@model E_Commerce.Pages.Cart.RecieptModel
+@{
+}
+
+<h2>Recpeit:</h2>
+
+@if (Model.CartProducts != null)
+{
+    foreach (var product in Model.CartProducts)
+    {
+        @* <a asp-page="/accounts/the name of the page" asp-route-id="@person.Id" ></a>*@
+<table>
+    <tr>
+        <td>
+            <a asp-page="/ProductDetails/Details" asp-route-id="@product.ID">
+                @if (product.URL != "")
+                {
+                    <img src="@product.URL" width=200 />
+                }
+
+                @product.ID @product.Name @product.Price 
+            </a>
+        </td>
+    </tr>
+    </table>
+
+        }
+        @foreach (var item in Model.CartProducts)
+        {
+            Model.total += item.Price;
+        }
+        <h3>Order Total: @Model.total $$</h3>
+
+        <form method="post">
+            <button type="submit" asp-page="/Cart/Checkout">Confirm Purchase</button>
+        </form>
+        }

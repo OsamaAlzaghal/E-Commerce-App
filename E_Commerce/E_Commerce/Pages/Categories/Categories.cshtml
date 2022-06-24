@@ -3,20 +3,30 @@
 @model E_Commerce.Pages.Categories.CategoriesModel
 @{
 }
-<h2>Welcome Back To Our Store</h2>
+@if (User.Identity.IsAuthenticated) 
+    { 
+    <h2 style="text-align: center">Welcome Back @User.Identity.Name!</h2>
+    }
+        else
+            {
+                <h2 style="text-align: center">Welcome to our store!</h2>
+            }
 
 @if (Model.categories != null)
 {
     foreach (var category in Model.categories)
     {
         @* <a asp-page="/accounts/the name of the page" asp-route-id="@person.Id" ></a>*@
-        <tr>
-            <td>
-                <a asp-page="/Products/Products" asp-route-id="@category.ID">
-                    @category.ID @category.Name
-                </a>
-            </td>
-        </tr>
+<table>
 
-    }
-}
+    <tr>
+        <td>
+            <a asp-page="/Products/Products" asp-route-id="@category.ID">
+                @category.ID @category.Name
+            </a>
+        </td>
+    </tr>
+    </table>
+
+        }
+        }

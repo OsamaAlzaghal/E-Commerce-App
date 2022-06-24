@@ -5,13 +5,12 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace E_Commerce.Pages.Cart
+namespace E_Commerce.Pages.GetStarted
 {
-    public class CheckOutModel : PageModel
+    public class GetStartedModel : PageModel
     {
         public void OnGet()
         {
         }
-
     }
 }

@@ -3,27 +3,37 @@
 @{
 }
 
-<h2>Welcome to your Cart</h2>
+<h2 style="text-align: center">Welcome to your Cart</h2>
 
 @if (Model.CartProducts != null)
 {
     foreach (var product in Model.CartProducts)
     {
         @* <a asp-page="/accounts/the name of the page" asp-route-id="@person.Id" ></a>*@
-        <tr>
-            <td>
-                <a asp-page="/ProductDetails/Details" asp-route-id="@product.ID">
-                    @if (product.URL != "")
-                    {
-                        <img src="@product.URL" width=200 />
-                    }
+        <table>
 
-                    @product.ID @product.Name
-                </a>
-            </td>
-        </tr>
+            <tr>
+                <td>
+                    <a asp-page="/ProductDetails/Details" asp-route-id="@product.ID">
+                        @if (product.URL != "")
+                        {
+                            <img src="@product.URL" width=200 />
+                        }
+
+                        @product.ID @product.Name
+                    </a>
+                    <form method="post">
+                        <button type="submit" asp-page="/Cart/Cart" asp-route-id="@product.ID">Remove From Cart</button>
+                    </form>
+                </td>
+            </tr>
+        </table>
+
     }
-<form method="post">
-    <button type="submit" asp-page="/Cart/CheckOut">Proceed to Checkout</button>
-</form>
+    <br>
+    <br>
+
+    <form method="get">
+        <button type="submit" asp-page="/Cart/Reciept">Proceed to Checkout</button>
+    </form>
 }

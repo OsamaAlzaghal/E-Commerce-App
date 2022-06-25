@@ -5,20 +5,25 @@
 }
 
 
+
+
+
+
 <h2>Please Sign In:</h2>
 
-<form method="post">
-    <label>UserName:</label>
-    <input asp-for="input.UserName" />
 
-   
-
-    <label>Password:</label>
-    <input asp-for="input.Password" />
-
-    <button type="submit">SignIn</button>
+<form method="post" class="px-4 py-3" style="margin-top:30px">
+    <div class="mb-3">
+        <label for="UserName" class="form-label">UserName</label>
+        <input name="UserName" class="form-control" id="exampleDropdownFormEmail1" placeholder="UserName">
+    </div>
+    <div class="mb-3">
+        <label for="Password" class="form-label">Password</label>
+        <input name="Password" type="password" class="form-control" id="exampleDropdownFormPassword1" placeholder="Password">
+    </div>
+    <button type="submit" class="btn btn-primary">SignIn</button>
+    <div class="dropdown-divider"></div>
+    <a asp-page="/Userhome/Signup" class="dropdown-item">New around here? Sign up</a>
 </form>
-<a asp-page="/Userhome/Signup">You don't have an account? SignUp now!</a>
-
 
 <div asp-validation-summary="All"></div>

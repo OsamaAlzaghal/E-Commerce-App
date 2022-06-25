@@ -3,36 +3,129 @@
 @{
 }
 
-<h2>Recpeit:</h2>
 
-@if (Model.CartProducts != null)
-{
-    foreach (var product in Model.CartProducts)
-    {
-        @* <a asp-page="/accounts/the name of the page" asp-route-id="@person.Id" ></a>*@
-<table>
-    <tr>
-        <td>
-            <a asp-page="/ProductDetails/Details" asp-route-id="@product.ID">
-                @if (product.URL != "")
-                {
-                    <img src="@product.URL" width=200 />
-                }
 
-                @product.ID @product.Name @product.Price 
-            </a>
-        </td>
-    </tr>
-    </table>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Reciept</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+</head>
+<body>
+    @if (Model.CartProducts != null)
+            {
+        <div class="card">
+            <div class="card-body">
+                <div class="container mb-5 mt-3">
 
-        }
-        @foreach (var item in Model.CartProducts)
-        {
-            Model.total += item.Price;
-        }
-        <h3>Order Total: @Model.total $$</h3>
 
-        <form method="post">
-            <button type="submit" asp-page="/Cart/Checkout">Confirm Purchase</button>
-        </form>
-        }
+                    <div class="container">
+                        <div class="col-md-12">
+                            <div class="text-center">
+                                <i class="fab fa-mdb fa-4x ms-0" style="color:#5d9fc5 ;"></i>
+                                <p class="pt-0">Electronics Center</p>
+                            </div>
+
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-xl-8">
+                                <ul class="list-unstyled">
+                                    <li class="text-muted">To: <span style="color:#5d9fc5 ;">@User.Identity.Name</span></li>
+                                </ul>
+                            </div>
+                            <div class="col-xl-4">
+                                <p class="text-muted">Invoice</p>
+                                <ul class="list-unstyled">
+                                    <li class="text-muted">
+                                    </li>
+                                    <li class="text-muted">
+                                        <i class="fas fa-circle" style="color:#84B0CA ;"></i> <span class="fw-bold">Creation Date: </span>@DateTime.Now
+                                    </li>
+                                    <li class="text-muted">
+                                        <i class="fas fa-circle" style="color:#84B0CA ;"></i> <span class="me-1 fw-bold">Status:</span><span class="badge bg-warning text-black fw-bold">
+                                            Unpaid
+                                        </span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="row my-2 mx-1 justify-content-center">
+                            <table class="table table-striped table-borderless">
+                                <thead style="background-color:#84B0CA ;" class="text-white">
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Description</th>
+                                        <th scope="col">Qty</th>
+                                        <th scope="col">Unit Price</th>
+                                        <th scope="col">Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    
+                                    @for (int i = 0; i < Model.CartProducts.Count; i++)
+                                    {
+                                        @* <a asp-page="/accounts/the name of the page" asp-route-id="@person.Id" ></a>*@
+                                        var product = Model.CartProducts[i];
+                                        <tr>
+                                            <th scope="row">@(i+1)</th>
+                                            <td>
+                                                @product.Name
+                                            </td>
+                                            <td>1</td>
+                                            <td>
+                                                @product.Price
+                                            </td>
+                                            <td>@(product.Price*1)</td>
+                                        </tr>
+                                    }
+                                    
+
+                                </tbody>
+
+                            </table>
+                        </div>
+                        <div class="row">
+                            <div class="col-xl-8">
+                                <p class="ms-3">Cash On Delivery</p>
+
+                            </div>
+                            <div class="col-xl-3">
+                                <ul class="list-unstyled">
+                                    @foreach (var item in Model.CartProducts)
+                                    {
+                                        Model.total += item.Price;
+                                    }
+                                    <li class="text-muted ms-3"><span class="text-black me-4">SubTotal</span>$@Model.total</li>
+                                    <li class="text-muted ms-3 mt-2"><span class="text-black me-4">Tax(15%)</span>$@(Model.total*.15)</li>
+                                </ul>
+                                <p class="text-black float-start">
+                                    <span class="text-black me-3"> Total Amount</span><span style="font-size: 25px;">$@(Model.total+Model.total*.15)</span>
+                                </p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+
+                            <div class="col-xl-2">
+                                <form>
+                                    <button type="submit" asp-page="/Cart/Checkout" class="btn btn-primary text-capitalize"
+                                            style="background-color:#60bdf3 ;">
+                                        Confirm Purchase
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+            }
+
+</body>
+</html>
+

@@ -1,44 +1,45 @@
 ﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @model E_Commerce.Models.Product
-<h3>Add a new Product</h3>
 
-<form asp-controller="Product" asp-action="Add" method="post" enctype="multipart/form-data">
-    <label>
-        <span>Name</span>
-        <input asp-for="@Model.Name" />
-    </label>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Product</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+</head>
 
-    <label>
+<body>
+    <h3>Add a new Product</h3>
+    <form asp-controller="Product" asp-action="Add" method="post" enctype="multipart/form-data" class="px-4 py-3">
+        <div class="mb-3">
+            <label for="Name" class="form-label">Name</label>
+            <input asp-for="@Model.Name" name="Name" class="form-control" placeholder="Laith">
+        </div>
+        <div class="mb-3">
+            <label for="Description" class="form-label">Description</label>
+            <input asp-for="@Model.Description" name="Description" class="form-control" placeholder="Description of the product">
+        </div>
+        <div class="mb-3">
+            <label for="Price" class="form-label">Price</label>
+            <input asp-for="@Model.Price" name="Price" class="form-control">
+        </div>
+        <div class="form-check form-switch">
+            <input asp-for="@Model.InStock" name="InStock" class="form-check-input" type="checkbox">
+            <label class="form-check-label" for="InStock">InStock</label>
+        </div>
+        <div class="mb-3">
+            <label for="CategoryID" class="form-label">CategoryID</label>
+            <input asp-for="@Model.CategoryID" name="CategoryID" class="form-control" type="number" min="1" max="1000" step="1" />
+        </div>
+        <div class="mb-3">
+            <label for="formFile" class="form-label">Choose Image</label>
+            <input class="form-control" type="file" id="formFile">
+        </div>
+        <div class="mb-3">
+            <button type="submit" class="btn btn-primary">Add</button>
+        </div>
+    </form>
 
-        <span>Description</span>
-        <input asp-for="@Model.Description" />
-    </label>
-
-    <label>
-
-        <span>Price</span>
-        <input asp-for="@Model.Price" />
-    </label>
-
-    <label>
-
-        <span>InStock</span>
-        <input asp-for="@Model.InStock" />
-    </label>
-
-    <label>
-
-        <span>CategoryID</span>
-        <input asp-for="@Model.CategoryID" />
-    </label>
-
-    <label>
-        <span>Image</span>
-        <input type="file" name="file" />
-    </label>
-    <button type="submit">
-        Add
-    </button>
-</form>
-
-<div asp-validation-summary="All"></div>
+    <div asp-validation-summary="All"></div>
+</body>
+</html>

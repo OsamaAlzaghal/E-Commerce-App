@@ -4,14 +4,16 @@ using E_Commerce.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace E_Commerce.Migrations
 {
     [DbContext(typeof(E_CommerceDbContext))]
-    partial class E_CommerceDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220625135006_AddUrl")]
+    partial class AddUrl
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -136,7 +138,7 @@ namespace E_Commerce.Migrations
                             ID = 2,
                             Description = "Find Speakers and headsets in our store here!",
                             Name = "Audio Devices",
-                            URL = "https://i.pinimg.com/736x/48/0c/da/480cda32088d4e5a1c0e4f53a2bb0fbc.jpg"
+                            URL = "https://w7.pngwing.com/pngs/368/623/png-transparent-symbol-computer-icons-audio-signal-loudspeaker-encapsulated-postscript-loudspeaker-miscellaneous-text-logo.png"
                         },
                         new
                         {

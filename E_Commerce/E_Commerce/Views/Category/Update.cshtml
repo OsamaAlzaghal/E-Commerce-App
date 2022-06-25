@@ -1,22 +1,30 @@
 ﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @model E_Commerce.Models.Category
 
-<h3>Edit Category</h3>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Page</title>
+</head>
+<body>
+    <h3>Edit Category</h3>
 
-<form asp-controller="Category" asp-action="Update" method="post">
-    <input hidden asp-for="@Model.ID" />
+    <form asp-controller="Category" asp-action="Update" method="post" class="px-4 py-3">
+        <input hidden asp-for="@Model.ID" />
 
-   
-    <label>
-        <span>Name</span>
-        <input asp-for="@Model.Name" />
-    </label>
-    <label>
-        <span>Details</span>
-        <input asp-for="@Model.Description" />
-    </label>
-    <button type="submit"> Save</button>
-</form>
+        <div class="mb-3">
+            <label for="Name" class="form-label">Name</label>
+            <input asp-for="@Model.Name" name="Name" class="form-control">
+        </div>
 
-<a asp-action="Delete" asp-controller="Category" asp-route-id="@Model.ID">Delete</a>
-<div asp-validation-summary="All"></div>
+        <div class="mb-3">
+            <label for="Name" class="form-label">Details</label>
+            <input asp-for="@Model.Description" name="Details" class="form-control">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+
+    <div asp-validation-summary="All"></div>
+</body>
+</html>

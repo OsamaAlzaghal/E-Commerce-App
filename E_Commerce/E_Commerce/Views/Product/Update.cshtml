@@ -1,37 +1,45 @@
 ﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @model E_Commerce.Models.Product
 
-<h3>Edit Product</h3>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Page</title>
+</head>
+<body>
+    <h3>Edit Product</h3>
 
-<form asp-controller="Product" asp-action="Update" method="post">
-    <input hidden asp-for="@Model.ID" />
+    <form asp-controller="Product" asp-action="Update" method="post" class="px-4 py-3">
+        <input hidden asp-for="@Model.ID" />
 
+        <div class="mb-3">
+            <label for="Name" class="form-label">Name</label>
+            <input asp-for="@Model.Name" name="Name" class="form-control">
+        </div>
 
-    <label>
-        <span>Name</span>
-        <input asp-for="@Model.Name" />
-    </label>
+        <div class="mb-3">
+            <label for="Price" class="form-label">Price</label>
+            <input asp-for="@Model.Price" name="Price" class="form-control">
+        </div>
 
-    <label>
-        <span>Price</span>
-        <input asp-for="@Model.Price" />
-    </label>
+        <div class="form-check form-switch">
+            <input asp-for="@Model.InStock" name="InStock" class="form-check-input" type="checkbox" >
+            <label class="form-check-label" for="InStock">InStock</label>
+        </div>
 
-    <label>
-        <span>InStock</span>
-        <input asp-for="@Model.InStock" />
-    </label>
+        <div class="mb-3">
+            <label for="Details" class="form-label">Details</label>
+            <input asp-for="@Model.Description" name="Details" class="form-control">
+        </div>
 
-    <label>
-        <span>Details</span>
-        <input asp-for="@Model.Description" />
-    </label>
+        <div class="mb-3">
+            <label for="Category ID" class="form-label">Category ID</label>
+            <input asp-for="@Model.CategoryID" name="Category ID" class="form-control">
+        </div>
 
-    <label>
-        <span>Category ID</span>
-        <input asp-for="@Model.CategoryID" />
-    </label>
-    <button type="submit"> Save</button>
-</form>
-<a asp-action="Delete" asp-controller="Product" asp-route-id="@Model.ID">Delete</a>
-<div asp-validation-summary="All"></div>
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+
+    <div asp-validation-summary="All"></div>
+</body>
+</html>

@@ -25,7 +25,7 @@ namespace E_Commerce.Controllers
             var user = await userService.Authenticate(login.UserName, login.Password);
             if (user == null)
             {
-                return RedirectToAction("Index");
+                return Redirect("/auth/index");
             }
             return RedirectToAction("List", "Category");
         }
@@ -40,7 +40,7 @@ namespace E_Commerce.Controllers
             var user = await userService.Register(register, this.ModelState);
             if (ModelState.IsValid)
             {
-                return Redirect("/");
+                return Redirect("/auth/index");
             }
             return View(user);
         }
@@ -54,6 +54,12 @@ namespace E_Commerce.Controllers
         {
             await userService.Logout();
             return Redirect("/Categories/Categories");
+        }
+
+        public async Task<IActionResult> AdminLogout()
+        {
+            await userService.Logout();
+            return Redirect("/Auth/Index");
         }
     }
 }

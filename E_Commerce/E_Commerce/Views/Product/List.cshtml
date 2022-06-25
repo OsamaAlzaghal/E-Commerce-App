@@ -2,31 +2,73 @@
 @model dynamic
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
-<button>
-    <a asp-action="Add" asp-controller="Product" class="headertag">Add Product</a>
-</button>
-<table>
-    <tr>
-        <th>ProductID</th>
-        <th>ProductName</th>
-        <th>CategoryID</th>
-        <th>InStock</th>
-        <th>Price</th>
-        <th>Description</th>
-    </tr>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>List of Products</title>
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                <a asp-controller="Home" asp-action="Index" asp-route-cartID=@item.ID asp-route-userID=@item.Name>
-                    @if (@item.URL != "")
-                    {
-                        <img src="@item.URL" width=200 />
-                    }
-                    @item.ID @item.Name @item.CategoryID @item.InStock @item.Price @item.Description <a asp-action="Delete" asp-controller="Product" asp-route-id="@item.ID" class="headertag">Delete</a> <a asp-action="Update" asp-controller="Product" asp-route-id="@item.ID">Edit</a>
+</head>
+<body>
+        <div style="display:flex; justify-content:center; align-items:center; margin-top:30px">
+            <button type="button" class="btn btn-primary btn-lg">
+                <a style="color:aliceblue; text-decoration:none" asp-action="Add" asp-controller="Product">
+                    Add Product
                 </a>
-            </td>
-        </tr>
-    }
-</table>
+            </button>
+        </div>
+
+            @foreach (var item in Model)
+            {
+                <div class="container py-5">
+                    <div class="row text-center text-white mb-5">
+                        <div class="col-lg-7 mx-auto">
+                            <h1 class="display-4">Product List</h1>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-8 mx-auto">
+                            <!-- List group-->
+                            <ul class="list-group shadow">
+                                <!-- list group item-->
+                                <li class="list-group-item">
+                                    <!-- Custom content-->
+                                    <div class="media align-items-lg-center flex-column flex-lg-row p-3">
+                                        <div class="media-body order-2 order-lg-1">
+                                            <h5 class="mt-0 font-weight-bold mb-2"> @item.Name </h5>
+                                            <p class="font-italic text-muted mb-0 small"> @item.Description </p>
+                                            <div class="d-flex align-items-center justify-content-between mt-1">
+                                                <h6 class="font-weight-bold my-2">@item.Price</h6>
+                                                <ul class="list-inline small">
+                                                    <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+                                                    <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+                                                    <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+                                                    <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+                                                    <li class="list-inline-item m-0"><i class="fa fa-star-o text-gray"></i></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        @if (@item.URL != "")
+                                        {
+                                            <img src="@item.URL" alt="Generic placeholder image" width="200" class="ml-lg-5 order-1 order-lg-2">
+                                        }
+
+                                        @if (User.Identity.IsAuthenticated && User.IsInRole("administrator"))
+                                        {
+                                            <a asp-action="Delete" asp-controller="Product" asp-route-id="@item.ID" class="btn btn-primary">Delete</a>
+                                        }
+
+                                        @if (User.Identity.IsAuthenticated && User.IsInRole("editor"))
+                                        {
+                                            <a asp-action="Update" asp-controller="Product" asp-route-id="@item.ID" class="btn btn-primary">Edit</a>
+                                        }
+
+                                    </div> <!-- End -->
+                                </li> <!-- End -->
+                                <!-- list group item-->
+                            </ul> <!-- End -->
+                        </div>
+                    </div>
+                </div>
+            }
+</body>
+</html>

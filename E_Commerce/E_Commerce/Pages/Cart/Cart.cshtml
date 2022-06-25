@@ -3,37 +3,90 @@
 @{
 }
 
-<h2 style="text-align: center">Welcome to your Cart</h2>
 
-@if (Model.CartProducts != null)
-{
-    foreach (var product in Model.CartProducts)
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>List of Products</title>
+
+</head>
+<body>
+    <h2 style="text-align: center">Welcome to your Cart</h2>
+
+    @if (Model.CartProducts.Count != 0)
     {
-        @* <a asp-page="/accounts/the name of the page" asp-route-id="@person.Id" ></a>*@
-        <table>
 
-            <tr>
-                <td>
-                    <a asp-page="/ProductDetails/Details" asp-route-id="@product.ID">
-                        @if (product.URL != "")
-                        {
-                            <img src="@product.URL" width=200 />
-                        }
+        @foreach (var product in Model.CartProducts)
+        {
+            <div class="container py-5">
+                <div class="row text-center text-white mb-5">
+                    <div class="col-lg-7 mx-auto">
+                        <h1 class="display-4">Product List</h1>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-8 mx-auto">
+                        <!-- List group-->
+                        <ul class="list-group shadow">
+                            <!-- list group item-->
+                            <li class="list-group-item">
+                                <!-- Custom content-->
+                                <div class="media align-items-lg-center flex-column flex-lg-row p-3">
+                                    <div class="media-body order-2 order-lg-1">
+                                        <a asp-page="/ProductDetails/Details" asp-route-id="@product.ID" class="mt-0 font-weight-bold mb-2"> @product.Name </a>
+                                        <p class="font-italic text-muted mb-0 small"> @product.Description </p>
+                                        <div class="d-flex align-items-center justify-content-between mt-1">
+                                            <h6 class="font-weight-bold my-2">@product.Price</h6>
+                                            <ul class="list-inline small">
+                                                <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+                                                <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+                                                <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+                                                <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+                                                <li class="list-inline-item m-0"><i class="fa fa-star-o text-gray"></i></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    @if (product.URL != "")
+                                    {
+                                        <img src="@product.URL" alt="Generic placeholder image" width="200" class="ml-lg-5 order-1 order-lg-2">
+                                    }
 
-                        @product.ID @product.Name
-                    </a>
-                    <form method="post">
-                        <button type="submit" asp-page="/Cart/Cart" asp-route-id="@product.ID">Remove From Cart</button>
-                    </form>
-                </td>
-            </tr>
-        </table>
+                                    <form method="post">
+                                        <button type="submit" asp-page="/Cart/Cart" asp-route-id="@product.ID" class="btn btn-primary text-capitalize"style="background-color:#60bdf3 ;">
+                                        Remove From Cart
+                                        </button>
+                                    </form>
 
-    }
-    <br>
-    <br>
+                                </div> <!-- End -->
+                            </li> <!-- End -->
+                            <!-- list group item-->
+                        </ul> <!-- End -->
+                    </div>
+                </div>
+            </div>
+        }
+        @if (Model.CartProducts.Count != 0)
+                {
+            <form method="get">
+                <button type="submit" asp-page="/Cart/Reciept" class="btn btn-primary text-capitalize"style="background-color:#60bdf3 ;">
+                Proceed to Checkout
+                </button>
+            </form>
+                }
 
-    <form method="get">
-        <button type="submit" asp-page="/Cart/Reciept">Proceed to Checkout</button>
-    </form>
-}
+
+            }
+            else
+            {
+                <h1>There is nothing is your cart!!</h1>
+            }
+
+
+
+
+</body>
+</html>

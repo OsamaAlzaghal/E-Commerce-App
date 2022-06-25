@@ -3,30 +3,46 @@
 @model E_Commerce.Pages.Categories.CategoriesModel
 @{
 }
-@if (User.Identity.IsAuthenticated) 
-    { 
+@if (User.Identity.IsAuthenticated)
+{
     <h2 style="text-align: center">Welcome Back @User.Identity.Name!</h2>
-    }
-        else
-            {
-                <h2 style="text-align: center">Welcome to our store!</h2>
-            }
+}
+else
+{
+    <h2 style="text-align: center">Welcome to our store!</h2>
+}
 
 @if (Model.categories != null)
 {
-    foreach (var category in Model.categories)
-    {
-        @* <a asp-page="/accounts/the name of the page" asp-route-id="@person.Id" ></a>*@
-<table>
+    <div class="container" style="margin-top: 30px">
+        <div class="row">
+            @foreach (var item in Model.categories)
+            {
+                <div class="col">
+                    <div class="card" style="width: 18rem; ">
+                        <img src="@item.URL" class="card-img-top" alt="..." style="width:200px">
+                        <div class="card-body">
+                            <h5 class="card-title">@item.Name</h5>
+                            <p class="card-text">@item.Description</p>
+                            <a asp-page="/Products/Products" asp-route-id="@item.ID" class="btn btn-primary">View Products</a>
+                            @if (User.Identity.IsAuthenticated && User.IsInRole("administrator"))
+                            {
+                                <a asp-action="Delete" asp-controller="Category" asp-route-id="@item.ID" class="btn btn-primary">Delete</a>
+                            }
+                            @if (User.Identity.IsAuthenticated && User.IsInRole("editor"))
+                            {
+                                <a asp-action="Update" asp-controller="Category" asp-route-id="@item.ID" class="btn btn-primary">Edit</a>
+                            }
 
-    <tr>
-        <td>
-            <a asp-page="/Products/Products" asp-route-id="@category.ID">
-                @category.ID @category.Name
-            </a>
-        </td>
-    </tr>
-    </table>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
 
-        }
-        }
+
+    
+
+
+}

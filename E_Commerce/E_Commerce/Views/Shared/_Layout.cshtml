@@ -8,17 +8,43 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 </head>
 <body>
-    <header style="display:flex; ">
-        <img src="data:image/png;base64,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" alt="HomeLogo" class="logo" style="width: 100px; height:100px">
-        <nav class="navbar" style="display: flex; justify-content: space-evenly; align-items: center;">
-            <a asp-controller="Home" asp-action="Index" class="headertag">Home</a>
-            <a asp-controller="Category" asp-action="List" class="headertag">Categories</a>
-            <a asp-controller="Product" asp-action="List" class="headertag">Products</a>
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/Category/List">
+                <img src="data:image/png;base64,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" alt="..." height="36">
+            </a>
 
-        </nav>
-    </header>
-            @RenderBody()
+            <div class="collapse navbar-collapse" id="mynavbar">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a asp-controller="Category" asp-action="List" class="nav-link">Categories</a>
+                    </li>
+                    <li class="nav-item">
+                        <a asp-controller="Product" asp-action="List" class="nav-link">Products</a>
+                    </li>
+                    @if (!User.Identity.IsAuthenticated)
+                    {
+                        <li class="nav-item">
+                            <a href="/Auth/Index" class="nav-link">SignIn</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a asp-controller="Auth" asp-action="AdminLogout" class="nav-link">SignOut</a>
+                        </li>
+                    }
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    @RenderBody()
+
 </body>
 </html>

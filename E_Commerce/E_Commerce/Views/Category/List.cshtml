@@ -2,26 +2,46 @@
 @model List<Category>
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
-<button>
-    <a asp-action="Add" asp-controller="Category" class="headertag">Add Category</a>
-</button>
-
-<table class="styled-table">
-    <tr>
-        <th>CategoryID</th>
-        <th>CategoryName</th>
-        <th>Description</th>
-
-    </tr>
-
-    @foreach (var item in Model)
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Page Title</title>
+</head>
+<body>
+    @if (User.Identity.IsAuthenticated && User.IsInRole("administrator"))
     {
-        <tr>
-            <td>
-                <a asp-controller="Category" asp-action="ProductsInCategory" asp-route-id=@item.ID>
-                    @item.ID @item.Name @item.Description <a asp-action="Delete" asp-controller="Category" asp-route-id="@item.ID" class="headertag">Delete</a>
-                </a>
-            </td>
-        </tr>
+        <div style="display:flex; justify-content:center; align-items:center; margin-top:30px">
+            <button type="button" class="btn btn-primary btn-lg">
+                <a style="color:aliceblue; text-decoration:none" asp-action="Add" asp-controller="Category"> Add Category</a>
+            </button>
+        </div>
     }
-</table>
+    <div class="container" style="margin-top: 30px">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col">
+                    <div class="card" style="width: 18rem; ">
+                        <img src="@item.URL" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">@item.Name</h5>
+                            <p class="card-text">@item.Description</p>
+                            <a asp-controller="Category" asp-action="ProductsInCategory" asp-route-id=@item.ID class="btn btn-primary">View Products</a>
+                            @if (User.Identity.IsAuthenticated && User.IsInRole("administrator"))
+                            {
+                                <a asp-action="Delete" asp-controller="Category" asp-route-id="@item.ID" class="btn btn-primary">Delete</a>
+                            }
+                            @if (User.Identity.IsAuthenticated && User.IsInRole("editor"))
+                            {
+                                <a asp-action="Update" asp-controller="Category" asp-route-id="@item.ID" class="btn btn-primary">Edit</a>
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+</body>
+</html>

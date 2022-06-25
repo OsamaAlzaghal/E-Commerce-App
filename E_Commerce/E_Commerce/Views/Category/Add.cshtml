@@ -1,22 +1,29 @@
 ﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @model E_Commerce.Models.Category
-<h3>Add a new Category</h3>
 
-<form asp-controller="Category" asp-action="Add" method="post">
-    <label>
-        <span>Name</span>
-        <input asp-for="@Model.Name" />
-    </label>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Category</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+</head>
 
-    <label>
+<body>
+    <h3>Add a new Category</h3>
+    <form asp-controller="Category" asp-action="Add" method="post" class="px-4 py-3">
+        <div class="mb-3">
+            <label for="Name" class="form-label">Name</label>
+            <input asp-for="@Model.Name" name="Name" class="form-control" placeholder="Laith">
+        </div>
+        <div class="mb-3">
+            <label for="Description" class="form-label">Description</label>
+            <input asp-for="@Model.Description" name="Description" class="form-control" placeholder="Description of the product">
+        </div>
+        <div class="mb-3">
+            <button type="submit" class="btn btn-primary">Add</button>
+        </div>
+    </form>
 
-        <span>Description</span>
-        <input asp-for="@Model.Description" />
-    </label>
-
-    <button type="submit">
-        add category
-    </button>
-</form>
-
-<div asp-validation-summary="All"></div>
+    <div asp-validation-summary="All"></div>
+</body>
+</html>

@@ -88,5 +88,18 @@ namespace E_Commerce.Models.Services
             _context.Entry(product).State = EntityState.Deleted;
             await _context.SaveChangesAsync();
         }
+
+        public async Task<List<Product>> RandomProduct()
+        {
+            List<Product> Randoms = new List<Product>();
+            List<Product> Products = await GetProducts();
+            Random Rnd = new Random();
+
+            for (int i = 0; i < 4; i++)
+            {
+                Randoms.Add(Products[Rnd.Next(0,Products.Count-1)]);
+            }
+        return Randoms;
+        }
     }
 }

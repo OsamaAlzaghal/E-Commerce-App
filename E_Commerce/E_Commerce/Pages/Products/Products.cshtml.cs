@@ -24,6 +24,8 @@ namespace E_Commerce.Pages.Products
         public string CartCookie { get; set; }
 
         public string CategoryName { get; set; }
+        public string CategoryDescription { get; set; }
+
 
         public ProductsModel(IProduct product, ICategory category)
         {
@@ -43,6 +45,7 @@ namespace E_Commerce.Pages.Products
             {
                 Products = await CategoryService.GetProductsByCategoryID(id);
                 CategoryName = (await CategoryService.GetCategory(id)).Name;
+                CategoryDescription = (await CategoryService.GetCategory(id)).Description;
             }
             //products = await CategoryService.GetProductsByCategoryID(id);
         }

@@ -1,0 +1,19 @@
+﻿@model E_Commerce.Components.CartImagesViewComponent.Cart
+
+@if (Model != null && User.Identity.IsAuthenticated)
+{
+    @foreach (var item in Model.Products)
+    {
+        <div>
+            <a asp-page="/ProductDetails/Details" asp-route-id="@item.ID">
+                <img style="height:250px"; width="200" src="@item.URL" />
+            </a>
+        </div>
+        
+    }
+
+}
+else
+{
+    <span>There's nothing in your cart...</span>
+}

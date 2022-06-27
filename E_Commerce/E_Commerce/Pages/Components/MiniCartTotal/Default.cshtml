@@ -1,0 +1,15 @@
+﻿@model E_Commerce.Components.MiniCartTotalViewComponent.Cart
+
+@if (Model != null && User.Identity.IsAuthenticated)
+{
+    double sum = 0;
+    foreach (var item in Model.Products)
+    {
+        sum += item.Price;
+    }
+    <span>@sum</span>
+}
+else
+{
+    <span>0</span>
+}

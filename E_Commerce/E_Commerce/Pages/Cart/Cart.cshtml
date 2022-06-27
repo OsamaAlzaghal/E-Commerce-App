@@ -3,90 +3,108 @@
 @{
 }
 
-
-
-
-
-
 <!DOCTYPE html>
 <html>
 <head>
     <title>List of Products</title>
-
+    @*<link href="~/css/emptycart.css" rel="stylesheet" />*@
 </head>
 <body>
     <h2 style="text-align: center">Welcome to your Cart</h2>
 
-    @if (Model.CartProducts.Count != 0)
+    @if (Model.CartProducts != null && Model.CartProducts.Count != 0)
     {
-
-        @foreach (var product in Model.CartProducts)
-        {
-            <div class="container py-5">
-                <div class="row text-center text-white mb-5">
-                    <div class="col-lg-7 mx-auto">
-                        <h1 class="display-4">Product List</h1>
-                    </div>
+<div class="container-fluid  mt-100">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 style="text-align:center">Cart</h5>
                 </div>
-                <div class="row">
-                    <div class="col-lg-8 mx-auto">
-                        <!-- List group-->
-                        <ul class="list-group shadow">
-                            <!-- list group item-->
-                            <li class="list-group-item">
-                                <!-- Custom content-->
-                                <div class="media align-items-lg-center flex-column flex-lg-row p-3">
-                                    <div class="media-body order-2 order-lg-1">
-                                        <a asp-page="/ProductDetails/Details" asp-route-id="@product.ID" class="mt-0 font-weight-bold mb-2"> @product.Name </a>
-                                        <p class="font-italic text-muted mb-0 small"> @product.Description </p>
-                                        <div class="d-flex align-items-center justify-content-between mt-1">
-                                            <h6 class="font-weight-bold my-2">@product.Price</h6>
-                                            <ul class="list-inline small">
-                                                <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
-                                                <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
-                                                <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
-                                                <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
-                                                <li class="list-inline-item m-0"><i class="fa fa-star-o text-gray"></i></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    @if (product.URL != "")
-                                    {
-                                        <img src="@product.URL" alt="Generic placeholder image" width="200" class="ml-lg-5 order-1 order-lg-2">
-                                    }
+                <div class="card-body cart">
+                    @foreach (var product in Model.CartProducts)
+                    {
+                        <div class="container-fluid">
+                            <div class="row text-center text-white mb-5">
+                                <div class="col-lg-7 mx-auto">
+                                    <h1 class="display-4"></h1>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-8 mx-auto">
+                                    <!-- List group-->
+                                    <ul class="list-group shadow">
+                                        <!-- list group item-->
+                                        <li class="list-group-item">
+                                            <!-- Custom content-->
+                                            <div class="media align-items-lg-center flex-column flex-lg-row p-3">
+                                                <div class="media-body order-2 order-lg-1">
+                                                    <a asp-page="/ProductDetails/Details" asp-route-id="@product.ID" class="mt-0 font-weight-bold mb-2"> @product.Name </a>
+                                                    <p class="font-italic text-muted mb-0 small"> @product.Description </p>
+                                                    <div class="d-flex align-items-center justify-content-between mt-1">
+                                                        <h6 class="font-weight-bold my-2">$@product.Price</h6>
+                                                        <ul class="list-inline small">
+                                                            <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+                                                            <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+                                                            <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+                                                            <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+                                                            <li class="list-inline-item m-0"><i class="fa fa-star-o text-gray"></i></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                @if (product.URL != "")
+                                                {
+                                                    <img src="@product.URL" alt="Generic placeholder image" width="200" class="ml-lg-5 order-1 order-lg-2">
+                                                }
 
-                                    <form method="post">
-                                        <button type="submit" asp-page="/Cart/Cart" asp-route-id="@product.ID" class="btn btn-primary text-capitalize"style="background-color:#60bdf3 ;">
-                                        Remove From Cart
-                                        </button>
-                                    </form>
+                                                <form method="post">
+                                                    <button type="submit" asp-page="/Cart/Cart" asp-route-id="@product.ID" class="btn btn-primary text-capitalize" style="background-color:#60bdf3 ;">
+                                                        Remove From Cart
+                                                    </button>
+                                                </form>
 
-                                </div> <!-- End -->
-                            </li> <!-- End -->
-                            <!-- list group item-->
-                        </ul> <!-- End -->
-                    </div>
+                                            </div> <!-- End -->
+                                        </li> <!-- End -->
+                                        <!-- list group item-->
+                                    </ul> <!-- End -->
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    <form style="display:flex; justify-content:center; margin-top:25px;" method="get">
+                        <button type="submit" asp-page="/Cart/Reciept" class="btn btn-primary text-capitalize" style="background-color:#60bdf3 ;">
+                            Proceed to Checkout
+                        </button>
+                    </form>
+                    
                 </div>
             </div>
-        }
-        @if (Model.CartProducts.Count != 0)
-                {
-            <form method="get">
-                <button type="submit" asp-page="/Cart/Reciept" class="btn btn-primary text-capitalize"style="background-color:#60bdf3 ;">
-                Proceed to Checkout
-                </button>
-            </form>
-                }
+        </div>
+    </div>
+</div>
+    }
+    else
+    {
+                            <div class="container-fluid  mt-100">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h5>Cart</h5>
+                                            </div>
+                                            <div class="card-body cart">
+                                                <div class="col-sm-12 empty-cart-cls text-center">
+                                                    <img src="https://i.imgur.com/dCdflKN.png" width="130" height="130" class="img-fluid mb-4 mr-3">
+                                                    <h3><strong>Your Cart is Empty</strong></h3>
+                                                    <h4>Add something to make me happy :)</h4>
+                                                    <a asp-page="/Categories/Categories" class="btn btn-primary cart-btn-transform m-3" data-abc="true">Continue Shopping</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            }
 
-
-            }
-            else
-            {
-                <h1>There is nothing is your cart!!</h1>
-            }
-
-
-
-
-</body>
+    </body>
 </html>

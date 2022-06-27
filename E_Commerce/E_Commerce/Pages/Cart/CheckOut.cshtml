@@ -3,7 +3,7 @@
 @{
 }
 
-<h2 style="text-align: center">Thank you for your purchase!</h2>
+@*<h2 style="text-align: center">Thank you for your purchase!</h2>
 <br>
 <h2 style="text-align: center">You've been sent an email confirmation</h2>
 <form method="get">
@@ -11,4 +11,17 @@
     <button asp-page="/Categories/Categories" type="submit" class="btn btn-primary text-capitalize" style="background-color:#60bdf3 ;">
     Return to home page
     </button>
-    </form>
+    </form>*@
+
+
+<div class="jumbotron text-center">
+    <h1 class="display-3">Thank You!</h1>
+    <p class="lead"><strong>Please check your email</strong> for further instructions on how to complete your account setup.</p>
+    <hr>
+    <p>
+        Having trouble? <a asp-page ="AboutUs/AboutUs">Contact us</a>
+    </p>
+    <p class="lead">
+        <a class="btn btn-primary btn-sm" asp-page ="/" role="button">Continue to homepage</a>
+    </p>
+</div>

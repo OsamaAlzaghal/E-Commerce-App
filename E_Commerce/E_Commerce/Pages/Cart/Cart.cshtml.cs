@@ -40,7 +40,10 @@ namespace E_Commerce.Pages.Cart
             {
                 CartProducts = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Product>>(CartCookie);
             }
-          
+            else
+            {
+                Redirect("/Cart/EmptyCart");
+            }
         }
 
         //Delete
@@ -64,5 +67,3 @@ namespace E_Commerce.Pages.Cart
         
     }
 }
-
-

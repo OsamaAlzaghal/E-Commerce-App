@@ -9,16 +9,18 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Text;
+using Microsoft.Extensions.Configuration;
 
 namespace E_Commerce.Models.Services
 {
     public class EmailService : IEmail
     {
         public string CartCookie { get; set; }
+        private readonly IConfiguration _configuration;
 
         public async Task SendMail(string email, List<Product> products)
         {
-            SendGridClient client = new SendGridClient("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");
+            SendGridClient client = new SendGridClient(_configuration.GetConnectionString("APIKEY"));
             SendGridMessage msg = new SendGridMessage();
             msg.SetFrom("21028869@student.ltuc.com", "IT Team");
             msg.AddTo(email);
@@ -57,13 +59,13 @@ namespace E_Commerce.Models.Services
 
         public async Task WelcomeMail(string email)
         {
-            SendGridClient client = new SendGridClient("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");
+            SendGridClient client = new SendGridClient(_configuration.GetConnectionString("APIKEY"));
             SendGridMessage msg = new SendGridMessage();
             msg.SetFrom("21028869@student.ltuc.com", "Store Team");
             msg.AddTo(email);
             msg.SetSubject("Welcome to our store!");
             msg.AddContent(MimeType.Html, "You have successfully registered an account to our store, Welcome!");
-
+            await client.SendEmailAsync(msg);
         }
     }
 }

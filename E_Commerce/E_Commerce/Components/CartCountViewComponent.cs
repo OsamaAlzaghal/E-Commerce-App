@@ -1,5 +1,6 @@
 ﻿using E_Commerce.Models;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -22,7 +23,7 @@ namespace E_Commerce.Components
             }
             else
             {
-                return View(new Cart { Count = 0, Products = null });
+                return View(new Cart { Count = 0, Products = new List<Product> { } });
             }
         }
 

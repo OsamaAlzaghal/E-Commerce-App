@@ -93,7 +93,4 @@ Full diagram that shows the whole relationships between entities & their nature 
 
 [↑ Table Of Contents ↑](#TABLE)
 
-
-
-
-
+## 

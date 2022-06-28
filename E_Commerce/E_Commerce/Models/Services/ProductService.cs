@@ -99,20 +99,39 @@ namespace E_Commerce.Models.Services
         /// </summary>
         /// <param name="product"></param>
         /// <returns> Returns the new updated product. </returns>
-        public async Task<Product> UpdateProduct(Product product)
+        public async Task<Product> UpdateProduct(Product product, IFormFile file)
         {
-            Category category = await _context.Categories.FindAsync(product.CategoryID);
+            Category category = await _context.Categories.Where(x => x.ID == product.CategoryID).Select(x => x).FirstOrDefaultAsync();
             Product oldProduct = await GetProduct(product.ID);
             // Very important step.
             oldProduct.Category = category;
-            oldProduct.CategoryID = product.CategoryID;
             oldProduct.Name = product.Name;
             oldProduct.Price = product.Price;
             oldProduct.InStock = product.InStock;
             oldProduct.Description = product.Description;
+            BlobContainerClient container = new BlobContainerClient(_configuration.GetConnectionString("AzureBlob"), "ecommercecontainer");
+            await container.CreateIfNotExistsAsync();
+            BlobClient blob = container.GetBlobClient(file.FileName);
+            using var stream = file.OpenReadStream();
+
+            // Options for blob.
+            BlobUploadOptions options = new BlobUploadOptions()
+            {
+                HttpHeaders = new BlobHttpHeaders() { ContentType = file.ContentType }
+            };
+
+            // If it does not exist, upload it.
+            if (!blob.Exists())
+            {
+                await blob.UploadAsync(stream, options);
+            }
+
+            // Get the image's URL from blob's URI.
+            oldProduct.URL = blob.Uri.ToString();
+            stream.Close();
             _context.Entry(oldProduct).State = EntityState.Modified;
             await _context.SaveChangesAsync();
-            return product;
+            return oldProduct;
         }
 
         /// <summary>

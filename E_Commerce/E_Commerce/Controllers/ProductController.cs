@@ -77,11 +77,11 @@ namespace E_Commerce.Controllers
         /// <returns> Returns a list of product if updated, else, return a to the form to update. </returns>
         [Authorize(Roles = "editor")]
         [HttpPost]
-        public async Task<IActionResult> Update(Product product)
+        public async Task<IActionResult> Update(Product product, IFormFile file)
         {
             if (ModelState.IsValid)
             {
-                await _products.UpdateProduct(product);
+                await _products.UpdateProduct(product, file);
                 return RedirectToAction("List", "Product");
             }
             return View(product);

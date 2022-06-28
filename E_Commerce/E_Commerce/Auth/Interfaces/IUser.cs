@@ -1,9 +1,5 @@
 ﻿using E_Commerce.Auth.Model.DTO;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace E_Commerce.Models.Interfaces

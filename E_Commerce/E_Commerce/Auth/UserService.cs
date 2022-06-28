@@ -3,11 +3,7 @@ using E_Commerce.Data;
 using E_Commerce.Models.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace E_Commerce.Models.Services
@@ -15,15 +11,18 @@ namespace E_Commerce.Models.Services
     public class UserService : IUser
     {
         private UserManager<ApplicationUser> _userManager;
-        // remove the JwtToken Service and use the signInManager
+        // Use the signInManager and userManager to sign in and sign up.
         private SignInManager<ApplicationUser> _signInManager;
         private readonly E_CommerceDbContext _context;
         private readonly IEmail _email;
 
-       
-        
-
-        // replace JWT with signInmanager
+        /// <summary>
+        /// Constructor to assign these variables.
+        /// </summary>
+        /// <param name="userManager"></param>
+        /// <param name="SignInMngr"></param>
+        /// <param name="dbContext"></param>
+        /// <param name="email"></param>
         public UserService(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> SignInMngr, E_CommerceDbContext dbContext, IEmail email)
         {
             _userManager = userManager;
@@ -31,6 +30,13 @@ namespace E_Commerce.Models.Services
             _context = dbContext;
             _email = email;
         }
+
+        /// <summary>
+        /// This method is responsible for the registration of any user.
+        /// </summary>
+        /// <param name="registerDto"></param>
+        /// <param name="modelstate"></param>
+        /// <returns> It returns UserDTO object when created, else, show list of errors. </returns>
         public async Task<UserDTO> Register(RegisterDTO registerDto, ModelStateDictionary modelstate)
         {
             //Cart cart = new Cart { };
@@ -42,18 +48,18 @@ namespace E_Commerce.Models.Services
                 UserName = registerDto.UserName,
                 Email = registerDto.Email,
                 //Cart = cart
-                
+
             };
             // user.CartID = user.Id;
 
             var result = await _userManager.CreateAsync(user, registerDto.Password);
-            
+
 
             if (result.Succeeded)
             {
                 // here goes the roles specifications ... 
                 IList<string> Roles = new List<string>();
-                Roles.Add("user");
+                Roles.Add("administrator");
                 await _userManager.AddToRolesAsync(user, Roles);
                 await _email.WelcomeMail(registerDto.Email);
                 return new UserDTO
@@ -62,7 +68,7 @@ namespace E_Commerce.Models.Services
                     Roles = await _userManager.GetRolesAsync(user)
                 };
             }
-            // // Else, that means there is an error, let us collect all the errors using the modelState
+            // Else, that means there is an error, let us collect all the errors using the modelState
             foreach (var error in result.Errors)
             {
                 var errorKey =
@@ -77,7 +83,12 @@ namespace E_Commerce.Models.Services
         }
 
 
-        // Updated 
+        /// <summary>
+        /// Check if we have a username and a password in our database for a user in our database.
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <returns> Return a userDTO or null if it doesn't exist or if the login info does not match. </returns>
         public async Task<UserDTO> Authenticate(string username, string password)
         {
             // replace the usage of the userManager and use the signinmanager
@@ -94,14 +105,13 @@ namespace E_Commerce.Models.Services
                 };
             }
 
-            //if (await _userManager.CheckPasswordAsync(user, password))
-            //{
-
-            //}
-
             return null;
         }
 
+        /// <summary>
+        /// This method is used to sign out the current logged in user.
+        /// </summary>
+        /// <returns> It doesn't return anything. </returns>
         public async Task Logout()
         {
             await _signInManager.SignOutAsync();

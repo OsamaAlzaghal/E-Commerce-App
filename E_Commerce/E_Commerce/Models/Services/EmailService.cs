@@ -1,15 +1,10 @@
 ﻿using E_Commerce.Models.Interfaces;
+using Microsoft.Extensions.Configuration;
 using SendGrid;
 using SendGrid.Helpers.Mail;
-using Microsoft.AspNetCore.Identity;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using System.Text;
-using Microsoft.Extensions.Configuration;
+using System.Threading.Tasks;
 
 namespace E_Commerce.Models.Services
 {
@@ -22,6 +17,13 @@ namespace E_Commerce.Models.Services
         {
             _configuration = configuration;
         }
+
+        /// <summary>
+        /// This method gets the user's email and the list of products from his/her cart, and sends 3 seperate emails for the Admin, Sales, Warehouse.
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="products"></param>
+        /// <returns></returns>
         public async Task SendMail(string email, List<Product> products)
         {
             SendGridClient client = new SendGridClient(_configuration.GetConnectionString("APIKEY"));
@@ -40,7 +42,6 @@ namespace E_Commerce.Models.Services
             }
             string body = sb.ToString();
             msg.AddContent(MimeType.Html, $"Thank you for your purchase! \n {body}");
-            
 
             SendGridMessage msgSales = new SendGridMessage();
             msgSales.SetFrom("21028869@student.ltuc.com", "IT Team");
@@ -54,13 +55,17 @@ namespace E_Commerce.Models.Services
             msgWarehouse.SetSubject("WareHouse Recite");
             msgWarehouse.AddContent(MimeType.Html, $"Customer Order \n {body}");
 
-
             await client.SendEmailAsync(msg);
             await client.SendEmailAsync(msgSales);
             await client.SendEmailAsync(msgWarehouse);
 
         }
 
+        /// <summary>
+        /// This method sets up the email to be sent as a welcoming email after the user registers.
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns> None. </returns>
         public async Task WelcomeMail(string email)
         {
             SendGridClient client = new SendGridClient(_configuration.GetConnectionString("APIKEY"));

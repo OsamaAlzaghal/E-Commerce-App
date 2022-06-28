@@ -13,11 +13,11 @@
     <form asp-controller="Category" asp-action="Add" method="post" class="px-4 py-3">
         <div class="mb-3">
             <label for="Name" class="form-label">Name</label>
-            <input asp-for="@Model.Name" name="Name" class="form-control" placeholder="Laith">
+            <input asp-for="@Model.Name" name="Name" class="form-control" placeholder="Laith" required>
         </div>
         <div class="mb-3">
             <label for="Description" class="form-label">Description</label>
-            <input asp-for="@Model.Description" name="Description" class="form-control" placeholder="Description of the product">
+            <input asp-for="@Model.Description" name="Description" class="form-control" placeholder="Description of the product" required>
         </div>
         <div class="mb-3">
             <button type="submit" class="btn btn-primary">Add</button>

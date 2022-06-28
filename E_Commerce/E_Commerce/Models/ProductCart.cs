@@ -14,3 +14,5 @@
 
 //    }
 //}
+
+// This class was created to save the cart in the database but there was an exception, so we just used the cookies instead.

@@ -18,6 +18,10 @@ namespace E_Commerce.Models.Services
         public string CartCookie { get; set; }
         private readonly IConfiguration _configuration;
 
+        public EmailService(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
         public async Task SendMail(string email, List<Product> products)
         {
             SendGridClient client = new SendGridClient(_configuration.GetConnectionString("APIKEY"));

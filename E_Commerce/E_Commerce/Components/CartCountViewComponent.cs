@@ -19,7 +19,15 @@ namespace E_Commerce.Components
             if(CartCookie != null)
             {
                 CartProducts = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Product>>(CartCookie);
+                if(CartProducts != null)
+                {
                 return View(new Cart { Count = CartProducts.Count, Products = CartProducts });
+                }
+                else
+                {
+                    return View(new Cart { Count = 0, Products = new List<Product> { } });
+
+                }
             }
             else
             {

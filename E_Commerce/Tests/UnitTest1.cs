@@ -31,17 +31,17 @@ namespace Tests
             Assert.Equal(category.Name, Newcategory.Name);
         }
 
-        [Fact]
-        public async void TestUpdatingProduct()
-        {
-            Product product = (Product)CreateAndSaveTestProduct().Result;
-            string OldProductName = product.Name;
-            product.Name = "New Laptop";
-            var service = new ProductService(_db, _configuration);
-            product = await service.UpdateProduct(product);
-            product = service.GetProduct(product.ID).Result;
-            Assert.NotEqual(OldProductName, product.Name);
-        }
+        //[Fact]
+        //public async void TestUpdatingProduct()
+        //{
+        //    Product product = (Product)CreateAndSaveTestProduct().Result;
+        //    string OldProductName = product.Name;
+        //    product.Name = "New Laptop";
+        //    var service = new ProductService(_db, _configuration);
+        //    product = await service.UpdateProduct(product);
+        //    product = service.GetProduct(product.ID).Result;
+        //    Assert.NotEqual(OldProductName, product.Name);
+        //}
 
         [Fact]
         public async void TestUpdatingCategory()

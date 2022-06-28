@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace E_Commerce.Controllers
 {
+    [Authorize(Roles = "administrator,editor")]
     public class ProductController : Controller
     {
         private readonly IProduct _products;

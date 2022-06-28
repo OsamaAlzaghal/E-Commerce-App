@@ -98,13 +98,13 @@
                                 <ul class="list-unstyled">
                                     @foreach (var item in Model.CartProducts)
                                     {
-                                        Model.total += item.Price;
+                                        Model.Total += item.Price;
                                     }
-                                    <li class="text-muted ms-3"><span class="text-black me-4">SubTotal</span>$@Model.total</li>
-                                    <li class="text-muted ms-3 mt-2"><span class="text-black me-4">Tax(15%)</span>$@(Model.total*.15)</li>
+                                    <li class="text-muted ms-3"><span class="text-black me-4">SubTotal</span>$@Model.Total</li>
+                                    <li class="text-muted ms-3 mt-2"><span class="text-black me-4">Tax(15%)</span>$@(Model.Total*.15)</li>
                                 </ul>
                                 <p class="text-black float-start">
-                                    <span class="text-black me-3"> Total Amount</span><span style="font-size: 25px;">$@(Model.total+Model.total*.15)</span>
+                                    <span class="text-black me-3"> Total Amount</span><span style="font-size: 25px;">$@(Model.Total+Model.Total*.15)</span>
                                 </p>
                             </div>
                         </div>

@@ -1,11 +1,7 @@
-﻿using E_Commerce.Data;
-using E_Commerce.Models;
+﻿using E_Commerce.Models;
 using E_Commerce.Models.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace E_Commerce.Controllers
@@ -18,24 +14,31 @@ namespace E_Commerce.Controllers
         {
             _category = category;
         }
+
+        /// <summary>
+        /// A method that calls GetCategories method from CategoryService.cs.
+        /// </summary>
+        /// <returns> Returns a view of these categories. </returns>
         public async Task<IActionResult> List()
         {
-            //List<Category> categories = new List<Category>();
-            //categories.Add(new Category { ID = 1, Name = "Laptops", Description = "Good"});
-            //categories.Add(new Category { ID = 2, Name = "TV", Description = "Good"});
-            //categories.Add(new Category { ID = 3, Name = "Accessories", Description = "Good"});
-            //categories.Add(new Category { ID = 4, Name = "Sound System", Description = "Good"});
-
             return View(await _category.GetCategories());
         }
 
-        ////////////////////////////////////////
+        /// <summary>
+        /// A method to call the Add category page.
+        /// </summary>
+        /// <returns> Returns a view for adding category form. </returns>
         [Authorize(Roles = "administrator")]
         public IActionResult Add()
         {
             return View();
         }
 
+        /// <summary>
+        /// This method calls CreateCategory method to create one.
+        /// </summary>
+        /// <param name="category"></param>
+        /// <returns> Returns a list of categories after adding. </returns>
         [Authorize(Roles = "administrator")]
         [HttpPost]
         public async Task<IActionResult> Add(Category category)
@@ -44,13 +47,15 @@ namespace E_Commerce.Controllers
             {
                 await _category.CreateCategory(category);
                 return RedirectToAction("List", "Category");
-                //return Content("You have successfully added a category ! Name: " + category.Name + " Description: " + category.Description);
             }
             return View(category);
         }
 
-        ////////////////////////////////////////
-
+        /// <summary>
+        /// This method gets an existing category to update it.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns> Returns NotFound if it does not exist, else shows the update form of the category. </returns>
         [Authorize(Roles = "editor")]
         public async Task<IActionResult> Update(int id)
         {
@@ -62,6 +67,12 @@ namespace E_Commerce.Controllers
             }
             return View(category);
         }
+
+        /// <summary>
+        /// Gets the updated object and saves it into the database.
+        /// </summary>
+        /// <param name="category"></param>
+        /// <returns> Returns a list of categories if updated. </returns>
         [Authorize(Roles = "editor")]
         [HttpPost]
         public async Task<IActionResult> Update(Category category)
@@ -70,21 +81,27 @@ namespace E_Commerce.Controllers
             {
                 await _category.UpdateCategory(category);
                 return RedirectToAction("List", "Category");
-                //return Content("You have successfully updated category (Name: " + category.Name + ")");
             }
             return View(category);
         }
 
-        //[HttpDelete]
+        /// <summary>
+        /// This method calls DeleteCategory to deleted a specific category.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns> Returns a list of categories after deleting a category. </returns>
         [Authorize(Roles = "administrator")]
         public async Task<IActionResult> Delete(int id)
         {
             await _category.DeleteCategory(id);
             return RedirectToAction("List", "Category");
-            //return Content("You have successfully deleted the category");
-            //return View("~/Views/Category/List.cshtml");
         }
 
+        /// <summary>
+        /// This method calls GetProductsByCategoryID to view products in a category.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Returns a view for a list of products in a specific category. </returns>
         public async Task<IActionResult> ProductsInCategory(int id)
         {
             return View(await _category.GetProductsByCategoryID(id));

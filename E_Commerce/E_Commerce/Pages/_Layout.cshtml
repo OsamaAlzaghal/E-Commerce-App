@@ -6,16 +6,17 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
-    <link href="https://use.fontawesome.com/releases/v5.0.1/css/all.css" rel="stylesheet">
     <link href="~/css/cartLogo.css" rel="stylesheet" />
+    <link href="~/css/MiniCart.css" rel="stylesheet" />
+    <link href="https://use.fontawesome.com/releases/v5.0.1/css/all.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 </head>
 <body>
-    
+
 
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="/Category/List">
+            <a class="navbar-brand" asp-page="/Categories/Categories">
                 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAYFBMVEX///8AAACXl5ednZ3u7u709PT8/PwXFxcPDw+SkpIZGRmvr69zc3P6+vpgYGAHBwepqalbW1ujo6NMTEwnJychISFBQUF8fHwvLy/R0dGysrJQUFDo6OjCwsLIyMjk5OQN1F6gAAAFkklEQVR4nO2d65ayIBSGtSllbNLsMJ377v8uv7HENAQxN4H0Pr9aa4vxeETYYhC8yDzN0rksxPKjvJQslLNcukJpKXP8hAU/tkPmmId3lmJoWYZW8lItu+q1UgZZl/96EkN5GUrlpda9Sp3kpQxS/mm4nT1HZjwURkKIlRG2eA5FvFAmrHAa8xhd9bupKhRPn0NahoJGtcJQYSis0CAwhCEM68DQDB9kmLzBMLFqmJ2fQwrDacZLCdtFYXjm2yUU2gkG+aCjFIbNEAxhSCfQCQxhCMM6MDTDBxmyXoZVu7SXIbNiyOKkIN6IhvE9lLQYbstSYg9dFN4LxbFouClLsXcaBlOO3RAAH8ficFlNXGB1OZh43L+koUukF2K/6962ksD+Sim4s63Tyo7ML1p3/5sV1lRtAFcFyQZN3TxE75AcqFfbFkooLjfuXUXr7IcLXmqr+919ucDut1an4ffFx41+fxi+vYg4PA6sluSNfiwegsKTm0VmD8WhDbhDtSZ39mABXb2q0/CXpGJ0VOfi0BNxxVdE10SiobpLt+SJ9WLCV/RFUi86vnjFJgNXBENrwFAbGFoDhk9EJYuoThEZiWHUCl92LnmGv426jMPwMXrTZH3LDf9pD5YjZyMxjNsVbhn+R1nsnrM2EsOkXSEsMvzlHb1+GKZBJo35YZh9wD6cS2N+GM4/4Fr6dz88xSUJix+wzYgMN/WaZ0n5Y3vi72VVI+XnaZ0iNA7DoFHvykKr72wkhgOAoTVgqA0MrQFDbWBoDRhqA0NrvNtweiQfrT+q281vNpQ+Yw5CORPGew3NCKpHZd9q+M+QYBj+ozKctaNrKO9yHYpiUpqmocLgj1Xa3qOo3U/zbczwW9NQ1k+T33oxhvdEuWt4u1oR9CY6YKjqTcylMT8M00AyLhW+YphPvimYVFudwJCR7sOhyTucKk2JwDAnPQ+p2q5V7QkMj4prqReGt5bfUnagjshQYpDy86Z9nF87U8G+ocqgi5EYDgCGBTDsDQwby8CwCxgWwLA3MGwsA8MuYFgAw97AsLEMDG8seC/49KVefQcMG/WeNgyCIlefcTL2INuOqBdj26h59YsqV98BQ8O5+g4YGs7Vd9qQJFffaUOSXH2nDUly9Z02VPXq+3It/YD7YVBrEXjWptGaUGIkhgOAYQEMewPDxjIw7AKGBTDsDQwby8CwCxgWwLA3MGwsA8Mbvue1rWTdbSPqxZAYdOTqe9HX9hG9+v7nefufq0/Zq0+Oc7n65JCch/6/9yTP1R+/YVbl6vv+/qEST94hHWho7NsCqled8S43sWEwM/A+vvoLVphTQRsYWgOG2sDQGjDUBobWgKE2MLRGP8OZp3PQ8rb78rTl8whnXswjzPg8wvHpM+bV938+b//nZMe8+mM39H9efZJcfSv0y9VvD3rznZmCYZkKVlBkKizqAp2MxHAAMLQGDLWBoTVgqI3/35L1/3vA/n/T2f/vcvv/bfXHiVicizvy0fpX2P3W6jT0NPxjH7rMfrhgcLUtoeRKYGgsH4gCoru0pA/AAdY0gkHkquJa7yleBzcPVNKG5NW9K+qe5CJT4yLvOrZBSnAfFFgcLquJC6wuh8FNNQA84Hmk3FLIHBGLk4J4I/ztLL6HklC4Hc+2Zamt8KgZhfdCcSyEppuyFKO7v3cT8Ys2Ew2rC7poyEdjsxZDjmjIpCs0SFWhuJchryvrZRjD0AQwhCEM68DQDDCEIQzr2DGsxmvY+TmkMJxW7VJhuygMz5kNw6pCyRv2YWLV0NujFIYwhGEdGJrBf8NAYSi/QS9eMpxteYiu+hrwEcWTGOIjOLm8VMvApqLUSV7KIDzDfy6GeJ7YkqrUUl7KJPcM/9aZK94ZMskxzVLJVp3nLJeEFKWOOZOuUF6qm/9CpIPFA0fI3gAAAABJRU5ErkJggg==" alt="..." height="36">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
@@ -27,6 +28,12 @@
                         <a asp-area="" asp-page="/Categories/Categories" class="nav-link">Electronics Center</a>
                     </li>
                     <li class="nav-item">
+                        <a asp-area="" asp-page="/Categories/Categories" class="nav-link">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a asp-area="" asp-page="/Cart/Cart" class="nav-link">Cart</a>
+                    </li>
+                    <li class="nav-item">
                         <a asp-area="" asp-page="/AboutUs/AboutUs" class="nav-link">About Us</a>
                     </li>
 
@@ -34,23 +41,18 @@
                 <form class="d-flex" style="display:flex; flex-direction:row; justify-content:center">
                     @if (User.Identity.IsAuthenticated)
                     {
-                    <a asp-area="" asp-page="/Cart/Cart" style="display:flex; flex-direction:column; justify-content:center; text-decoration:none">
-                        <i  class="fa badge fa-lg" value=@await Component.InvokeAsync("CartCount")>&#xf07a;</i>
-                    </a>
-                    }
-                    else
-                    {
-                        <a asp-area="" asp-page="/Userhome/SignUp" class="navbar-brand"> SignUp</a>
-                    }
-                    @if (!User.Identity.IsAuthenticated)
-                    {
+                        <a data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" style="display:flex; flex-direction:column; justify-content:center; text-decoration:none">
+                            <i style="cursor:pointer;" class="fa badge fa-lg" value=@await Component.InvokeAsync("CartCount")>&#xf07a;</i>
+                        </a>
 
-                        <a asp-area="" asp-page="/Userhome/SignIn" class="navbar-brand"> SignIn</a>
-                    }
-                    else
-                    {
                         <a asp-area="" asp-controller="Auth" asp-action="Logout" class="navbar-brand"> SignOut</a>
                     }
+                    else
+                    {
+                        <a asp-area="" asp-page="/Userhome/SignIn" class="navbar-brand"> SignIn</a>
+                        <a asp-area="" asp-page="/Userhome/SignUp" class="navbar-brand"> Register</a>
+                    }
+
                 </form>
             </div>
         </div>
@@ -60,13 +62,37 @@
          style=" background-image: url('https://www.cometasystems.com/sites/default/files/electrical-eng-hero.jpg'); height: 300px; margin-bottom: 30px">
         <div class="mask" style="background-color: rgba(0, 0, 0, 0.6);">
             <div class="d-flex justify-content-center align-items-center h-100">
-                <div class="text-white">
-                    
+                <div class="text-black">
+                    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+                        <div style="border-bottom: 1px solid black" class="offcanvas-header">
+                            <h5 class="offcanvas-title" id="offcanvasRightLabel">Your Cart(@await Component.InvokeAsync("CartCount") )</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                        </div>
+                        <div class="offcanvas-body">
+                            @await Component.InvokeAsync("CartImages")
+                        </div>
+                        <!-- Footer -->
+                        <footer class="u-sidebar__footer u-sidebar__footer--cart">
+                            <div class="card-footer text-center p-5">
+                                <div class="mb-3">
+                                    <span class="d-block font-weight-semi-bold">Order Total</span>
+                                    <span class="d-block">$@await Component.InvokeAsync("MiniCartTotal")</span>
+                                </div>
+                                <div class="mb-2">
+                                    <a class="btn btn-default" href="/Cart/Cart">Review Bag and Checkout</a>
+                                </div>
+                                <p class="small mb-0"><a style="text-decoration:none" class="link-muted" asp-page="/Categories/Categories">Start Shopping</a></p>
+                            </div>
+                        </footer>
+                        <!-- End Footer -->
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
     @RenderBody()
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy" crossorigin="anonymous"></script>
 
     <footer class="bg-dark text-center text-white" style="position: relative; bottom: 0; width: 100%; margin-top: 100px">
         <!-- Grid container -->
@@ -116,4 +142,3 @@
 
 </body>
 </html>
-

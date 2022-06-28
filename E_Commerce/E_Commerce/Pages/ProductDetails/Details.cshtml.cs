@@ -17,10 +17,7 @@ namespace E_Commerce.Pages.Product_Details
     {
         private readonly IProduct ProductService;
         [BindProperty]
-        public Random Rnd { get; set; }
-        [BindProperty]
         public List<Product> items { get; set; }
-
         [BindProperty]
         public Product Product { get; set; }
         [BindProperty]
@@ -38,7 +35,6 @@ namespace E_Commerce.Pages.Product_Details
         public async Task OnGet(int id)
         {
             Product = await ProductService.GetProduct(id);
-             Rnd = new Random();
             Products = await ProductService.GetProducts();
             items = await ProductService.RandomProduct();
 

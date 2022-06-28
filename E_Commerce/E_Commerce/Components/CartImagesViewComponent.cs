@@ -22,7 +22,7 @@ namespace E_Commerce.Components
             }
             else
             {
-                return View(new Cart { Count = 0, Products = null });
+                return View(new Cart { Count = 0, Products = new List<Product> { } });
             }
         }
 

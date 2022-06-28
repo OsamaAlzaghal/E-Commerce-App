@@ -34,7 +34,7 @@ namespace E_Commerce.Pages.UserHome
                 Email = input.Email,
                 Password = input.Password
             };
-            //var user = await UserService.Register(person, this.ModelState);
+            var user = await UserService.Register(person, this.ModelState);
             //CookieOptions cookieOptions = new CookieOptions();
             //cookieOptions.Expires = new System.DateTimeOffset(DateTime.Now.AddDays(7));
 

@@ -5,6 +5,12 @@
       "type": "mssql.azure",
       "connectionId": "ConnectionStrings:DefaultConnection",
       "secretStore": "AzureAppSettings"
+    },
+    "storage1": {
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Storage/storageAccounts/ecommerceproject",
+      "type": "storage.azure",
+      "connectionId": "ConnectionStrings:AzureBlob",
+      "secretStore": "AzureAppSettings"
     }
   }
 }

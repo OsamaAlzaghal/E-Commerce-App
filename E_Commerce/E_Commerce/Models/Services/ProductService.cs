@@ -35,6 +35,7 @@ namespace E_Commerce.Models.Services
             product.Category = await _context.Categories.FindAsync(product.CategoryID);
 
             // Connection.
+            // Configuration.GetConnectionString("AzureBlob"), "attachments"
             BlobContainerClient container = new BlobContainerClient(_configuration.GetConnectionString("AzureBlob"), "ecommercecontainer");
             await container.CreateIfNotExistsAsync();
             BlobClient blob = container.GetBlobClient(file.FileName);

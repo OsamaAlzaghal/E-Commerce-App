@@ -34,7 +34,7 @@
 
         <div class="mb-3">
             <label for="Category ID" class="form-label">Category ID</label>
-            <input asp-for="@Model.CategoryID" name="Category ID" class="form-control" required>
+            <input asp-for="@Model.CategoryID" name="Category ID" class="form-control" type="number" min="1" max="4" step="1" required>
         </div>
 
         <button type="submit" class="btn btn-primary">Save</button>

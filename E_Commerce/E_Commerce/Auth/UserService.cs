@@ -59,7 +59,7 @@ namespace E_Commerce.Models.Services
             {
                 // here goes the roles specifications ... 
                 IList<string> Roles = new List<string>();
-                Roles.Add("administrator");
+                Roles.Add("user");
                 await _userManager.AddToRolesAsync(user, Roles);
                 await _email.WelcomeMail(registerDto.Email);
                 return new UserDTO

@@ -1,8 +1,6 @@
 ﻿using E_Commerce.Models;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace E_Commerce.Components
@@ -14,15 +12,23 @@ namespace E_Commerce.Components
         [BindProperty]
         public Cart ProductsCart { get; set; }
         public string CartCookie { get; set; }
+
+        /// <summary>
+        /// We used this ViewComponent to calculate the subtotal price summation of our cart products, then view it in the mini cart.
+        /// </summary>
+        /// <returns> It returns the subtotal price, else, return 0. </returns>
         public async Task<IViewComponentResult> InvokeAsync()
         {
+            // Get the user's cookie and check if it exists.
             CartCookie = HttpContext.Request.Cookies[$"{User.Identity.Name}'CartsList"];
             if (CartCookie != null)
             {
+                // Get the list of products that we have in the cookie.
                 CartProducts = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Product>>(CartCookie);
-                if(CartProducts != null)
+                // Check if the list is empty.
+                if (CartProducts != null)
                 {
-                return View(new Cart { Count = CartProducts.Count, Products = CartProducts });
+                    return View(new Cart { Count = CartProducts.Count, Products = CartProducts });
                 }
                 else
                 {
@@ -36,6 +42,9 @@ namespace E_Commerce.Components
             }
         }
 
+        /// <summary>
+        /// Our component that was passed to the view.
+        /// </summary>
         public class Cart
         {
             public int Count { get; set; }

@@ -1,13 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using E_Commerce.Models;
 using E_Commerce.Models.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace E_Commerce.Pages.Products
 {
@@ -22,7 +19,6 @@ namespace E_Commerce.Pages.Products
         public List<Product> CartProducts { get; set; }
         [BindProperty]
         public string CartCookie { get; set; }
-
         public string CategoryName { get; set; }
         public string CategoryDescription { get; set; }
 
@@ -33,21 +29,17 @@ namespace E_Commerce.Pages.Products
             CategoryService = category;
         }
 
+        /// <summary>
+        /// This method gets the cookie and the products info.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Returns a page for the list of products in a specific category. </returns>
         public async Task OnGet(int id)
         {
             CartCookie = HttpContext.Request.Cookies[$"{User.Identity.Name}'CartsList"];
-            if (CartCookie != null && id == 0)
-            {
-                Products = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Product>>(CartCookie);
-
-            }
-            else
-            {
-                Products = await CategoryService.GetProductsByCategoryID(id);
-                CategoryName = (await CategoryService.GetCategory(id)).Name;
-                CategoryDescription = (await CategoryService.GetCategory(id)).Description;
-            }
-            //products = await CategoryService.GetProductsByCategoryID(id);
+            Products = await CategoryService.GetProductsByCategoryID(id);
+            CategoryName = (await CategoryService.GetCategory(id)).Name;
+            CategoryDescription = (await CategoryService.GetCategory(id)).Description;
         }
     }
 }
